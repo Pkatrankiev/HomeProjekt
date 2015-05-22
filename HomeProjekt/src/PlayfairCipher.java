@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class PlayfairCipher {
 
 	public static void main(String[] args) {
+		
 		Scanner input = new Scanner(System.in);
 		String sr = null;
 
