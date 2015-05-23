@@ -54,7 +54,7 @@ public class PlayfairDeCipher {
 		}
 
 		// пренареждане в матричен вид
-		System.out.println("Таблицата за кодиране е:");
+		System.out.println("\nТаблицата за кодиране е:");
 		char[][] kodTable = new char[5][5];
 		int k = 0;
 		for (int i = 0; i < 5; i++) {
@@ -70,22 +70,21 @@ public class PlayfairDeCipher {
 			System.out.println();
 		}
 
-		System.out.println("Разкодирането на сричките е:");
+		System.out.println("\nРазкодирането на сричките е:");
 
 		int ia = 0;
 		int ib = 0;
 		int ja = 0;
 		int jb = 0;
-		int l = 0;
 
 		// превръщаме всеки символ от стринга за разкодиране в масив от символи
 		char[] kodStr = strWordBig.toCharArray();
 
-		// инициализираме масив в които ще запишем новите разкодирани срички
-		String[] dw2 = new String[kodStr.length];
+		// инициализираме стринг в които ще запишем новите разкодирани срички
+		StringBuilder dw2 = new StringBuilder();
 
 		// по инструкции закодирания текст е в срички разделени с пауза
-		// обхождаме масива с със стъпка 3 /сричка+пауза/
+		// обхождаме масива със стъпка 3 /сричка+пауза/
 		for (int p = 0; p < kodStr.length; p = p + 3) {
 			char aDW = kodStr[p]; // първа буква от сричката
 			char bDW = kodStr[p + 1]; // втора буква от сричката
@@ -142,15 +141,39 @@ public class PlayfairDeCipher {
 					ib = ib - 1;
 				bDW = kodTable[ib][jb];
 			}
-			// записваме разкодираната сричка в поредния елемент на масива
-			dw2[l] = "" + aDW + bDW;
+			// записваме разкодираната сричка като пореден елемент на стринга
+
 			System.out.println(kodStr[p] + "" + kodStr[p + 1] + " " + sr + " "
-					+ dw2[l]);
-			l++;
+					+ aDW + bDW);
+			dw2.append(aDW);
+			dw2.append(bDW);
 		}
-		for (int i = 0; i < l; i++) {
-			System.out.print(dw2[i]);
+
+		// инициализираме нов стринг в който махаме, ако има добавен Х в
+		// оригиналния текст
+		StringBuilder origText = new StringBuilder();
+
+		boolean fl; // флаг за добавен Х
+
+		// обхождаме стринга dw2 и проверяваме дали е добавен Х-ът
+		for (int i = 0; i < dw2.length(); i++) {
+			fl = true;
+			if (dw2.charAt(i) == 'X') {
+				if (i > 0) {
+					if (i == dw2.length() - 1) {
+						fl = false; // Х-ът е последен - добавен за четност
+					} else if (dw2.charAt(i - 1) == dw2.charAt(i + 1)) {
+						fl = false;// Х-ът е добавен м/у еднакви букви
+					}
+				}
+			}
+			if (fl) {
+				origText.append(dw2.charAt(i));
+			}
 		}
+		System.out.println("\nРазкодираният текст е:");
+		System.out.print(origText);
+
 	}
 
 }
