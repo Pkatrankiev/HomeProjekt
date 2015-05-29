@@ -10,7 +10,7 @@ public class PlayfairDeCipher {
 		System.out.print("Въведете текста за декодиране! ");
 		String strWord = input.nextLine();
 
-		// перобразуваме вс.символи в големи
+		// преобразуваме вс.символи в големи
 		String strWordBig = strWord.toUpperCase();
 
 		// Въвеждаме кодиращата дума
