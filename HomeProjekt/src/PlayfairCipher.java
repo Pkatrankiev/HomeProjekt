@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class PlayfairCipher {
 
 	public static void main(String[] args) {
-		
 		Scanner input = new Scanner(System.in);
 		String sr = null;
 
@@ -11,12 +10,16 @@ public class PlayfairCipher {
 		System.out.print("Въведете текста за кодиране! ");
 		String strWord = input.nextLine();
 
-		// перобразуваме вс.символи в големи
+		// преобразуваме вс.символи в големи
 		String kod = strWord.toUpperCase();
 
 		// [\d\s,:], премахва всички цифри , всички интервали, запетаи и
 		// двоеточия.
-		String[] kodStr = kod.split("[\\d\\s,:]+");
+		String[] kodStr = kod.split("[\\d\\s,:;.!?]+");
+
+		for (String chap : kodStr) {
+			System.out.print(chap);
+		}
 
 		// преподреждаме сринга
 		// със StringBuilder в буфера преобразуваме стринга за да спестим време
@@ -38,15 +41,12 @@ public class PlayfairCipher {
 			sim = sb.charAt(i);
 			sbor.append(sb.charAt(i));
 		}
-//		System.out.println(sbor);
 
-		// добавяме 'х' за четност на реда
+		// добавяме 'X' за четност на реда
 		n = sbor.length();
-//		System.out.println(n);
 		if (n % 2 != 0) {
 			sbor.append('X');
 		}
-//		System.out.println(sbor);
 
 		// разделяме текста на двойки
 		n = sbor.length();
@@ -54,7 +54,7 @@ public class PlayfairCipher {
 		String[] dw = new String[n];
 		for (int i = 0; i < n; i++) {
 			dw[i] = sbor.substring(i * 2, i * 2 + 2);
-//			System.out.println(dw[i]);
+
 		}
 		int nDW = n;
 
@@ -64,20 +64,21 @@ public class PlayfairCipher {
 
 		// към текста добавяме всичките букви от лат.азбука
 		strWord = strWord + "abcdefghiklmnopqrstuvwxyz";
-		
+
 		// перобразуваме вс.символи в големи
 		kod = strWord.toUpperCase();
-				
-		// от този стринг ще махнем повтарящите се и празните символи
-		
+
+		// от този стринг ще махнем повтарящите се и празните символи и
+		// останалите ще ги запишем в масива arrayT
+
 		// инициализираме променлива n с дължината на стринга
 		n = kod.length();
-		
+
 		// и нов стринг с дължина - броя на лат.азбука
 		char[] arrayT = new char[25];
 		int m = 0;
 		boolean f = false;// флаг за празен или повтарящ се символ
-		
+
 		arrayT[0] = kod.charAt(0);// на първа позиция в новия масив слагаме
 									// първия символ от стринга
 
@@ -94,9 +95,7 @@ public class PlayfairCipher {
 				}
 			}
 			if (f != true) {
-				
 				m++;
-//				System.out.println(m+" "+kod.charAt(i));
 				arrayT[m] = kod.charAt(i);
 			}
 		}
@@ -209,7 +208,7 @@ public class PlayfairCipher {
 		}
 		System.out.println("\nЗакодираният текст е:");
 		for (int i = 0; i < dw2.length; i++) {
-			System.out.print(dw2[i]+" ");
+			System.out.print(dw2[i] + " ");
 		}
 	}
 
