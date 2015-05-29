@@ -33,7 +33,7 @@ public class PlayfairCipher {
 		sbor.append(sim);
 		for (int i = 1; i < n; i++) {
 			if (sim == sb.charAt(i)) {
-				sbor.append('x');
+				sbor.append('X');
 			}
 			sim = sb.charAt(i);
 			sbor.append(sb.charAt(i));
@@ -44,7 +44,7 @@ public class PlayfairCipher {
 		n = sbor.length();
 //		System.out.println(n);
 		if (n % 2 != 0) {
-			sbor.append('x');
+			sbor.append('X');
 		}
 //		System.out.println(sbor);
 
@@ -102,7 +102,7 @@ public class PlayfairCipher {
 		}
 
 		// пренареждане в матричен вид
-		System.out.println("Таблицата за кодиране е:");
+		System.out.println("\nТаблицата за кодиране е:");
 		char[][] kodTable = new char[5][5];
 		int k = 0;
 		for (int i = 0; i < 5; i++) {
@@ -120,7 +120,7 @@ public class PlayfairCipher {
 			System.out.println();
 		}
 
-		System.out.println("Закодирането на сричките е:");
+		System.out.println("\nЗакодирането на сричките е:");
 
 		int ia = 0;
 		int ib = 0;
@@ -207,6 +207,7 @@ public class PlayfairCipher {
 			dw2[p] = "" + aDW + bDW;
 			System.out.println(dw[p] + " " + sr + " " + dw2[p]);
 		}
+		System.out.println("\nЗакодираният текст е:");
 		for (int i = 0; i < dw2.length; i++) {
 			System.out.print(dw2[i]+" ");
 		}
