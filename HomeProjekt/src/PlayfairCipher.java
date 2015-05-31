@@ -2,60 +2,57 @@ import java.util.Scanner;
 
 public class PlayfairCipher {
 
+	public static StringBuilder UpAndSplitMetod(String strWord) {
+
+		// преобразуваме вс.символи в големи
+		String kod = strWord.toUpperCase();
+
+		// заместваме в стринга всички символи "J" с "I"
+		kod = kod.replaceAll("J", "I");
+
+		// [\d\s,:], премахваме всички цифри, всички интервали, , : ; . ! ?
+		String[] kodStr = kod.split("[\\d\\s,:;.!?]+");
+
+		// преобразуваме масива в сринг
+		// със StringBuilder за да спестим време и ресурси
+		StringBuilder encodingText = new StringBuilder();
+		for (String chap : kodStr) {
+			encodingText.append(chap);
+		}
+		return encodingText;
+	}
+
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		
-		String sr = null;
 
 		// Въвеждаме текста за кодиране
 		System.out.print("Въведете текста за кодиране! ");
 		String strWord = input.nextLine();
 
-		// преобразуваме вс.символи в големи
-		String kod = strWord.toUpperCase();
+		StringBuilder encodingText = UpAndSplitMetod(strWord);
 
-		// [\d\s,:], премахва всички цифри , всички интервали, запетаи и
-		// двоеточия.
-		String[] kodStr = kod.split("[\\d\\s,:;.!?]+");
-
-		for (String chap : kodStr) {
-			System.out.print(chap);
-		}
-
-		// преподреждаме сринга
-		// със StringBuilder в буфера преобразуваме стринга за да спестим време
-		// и ресурси
-		StringBuilder sb = new StringBuilder();
-		for (String chap : kodStr) {
-			sb.append(chap);
-		}
-
-		// добавяме 'х' м/у еднакви символи
-		StringBuilder sbor = new StringBuilder();
-		int n = sb.length();
-		char sim = sb.charAt(0);
-		sbor.append(sim);
-		for (int i = 1; i < n; i++) {
-			if (sim == sb.charAt(i)) {
-				sbor.append('X');
+		// добавяме 'Х' м/у еднакви символи
+		StringBuilder textWithX = new StringBuilder();
+		char sim = encodingText.charAt(0);
+		textWithX.append(sim);
+		for (int i = 1; i < encodingText.length(); i++) {
+			if (sim == encodingText.charAt(i)) {
+				textWithX.append('X');
 			}
-			sim = sb.charAt(i);
-			sbor.append(sb.charAt(i));
+			sim = encodingText.charAt(i);
+			textWithX.append(encodingText.charAt(i));
 		}
 
 		// добавяме 'X' за четност на реда
-		n = sbor.length();
-		if (n % 2 != 0) {
-			sbor.append('X');
+		if (textWithX.length() % 2 != 0) {
+			textWithX.append('X');
 		}
 
 		// разделяме текста на двойки
-		n = sbor.length();
-		n = n / 2;
+		int n = textWithX.length() / 2;
 		String[] dw = new String[n];
 		for (int i = 0; i < n; i++) {
-			dw[i] = sbor.substring(i * 2, i * 2 + 2);
-
+			dw[i] = textWithX.substring(i * 2, i * 2 + 2);
 		}
 		int nDW = n;
 
@@ -66,11 +63,7 @@ public class PlayfairCipher {
 		// към текста добавяме всичките букви от лат.азбука
 		strWord = strWord + "abcdefghiklmnopqrstuvwxyz";
 
-		// перобразуваме вс.символи в големи
-		kod = strWord.toUpperCase();
-
-		// от този стринг ще махнем повтарящите се и празните символи и
-		// останалите ще ги запишем в масива arrayT
+		StringBuilder kod = UpAndSplitMetod(strWord);
 
 		// инициализираме променлива n с дължината на стринга
 		n = kod.length();
@@ -78,7 +71,7 @@ public class PlayfairCipher {
 		// и нов стринг с дължина - броя на лат.азбука
 		char[] arrayT = new char[25];
 		int m = 0;
-		boolean f = false;// флаг за празен или повтарящ се символ
+		boolean f = false;// флаг за повтарящ се символ
 
 		arrayT[0] = kod.charAt(0);// на първа позиция в новия масив слагаме
 									// първия символ от стринга
@@ -90,7 +83,7 @@ public class PlayfairCipher {
 			f = false;
 			for (int j = 0; j <= m; j++) {
 
-				if ((arrayT[j] == kod.charAt(i)) || (kod.charAt(i) == ' ')) {
+				if (arrayT[j] == kod.charAt(i)) {
 					f = true;
 					break;
 				}
@@ -114,8 +107,10 @@ public class PlayfairCipher {
 					break;
 
 				}
-
-				System.out.print(kodTable[i][j] + " ");
+				if (kodTable[i][j] == 'I') {
+					System.out.print("i/j" + " ");
+				} else
+					System.out.print(kodTable[i][j] + " ");
 			}
 			System.out.println();
 		}
@@ -126,6 +121,7 @@ public class PlayfairCipher {
 		int ib = 0;
 		int ja = 0;
 		int jb = 0;
+		String sr = null;
 
 		// инициализираме масив в които ще запишем новите закодирани срички
 		String[] dw2 = new String[nDW];
@@ -212,5 +208,4 @@ public class PlayfairCipher {
 			System.out.print(dw2[i] + " ");
 		}
 	}
-
 }
