@@ -4,17 +4,17 @@ public class PlayfairCipher {
 
 	public static StringBuilder UpAndSplitMetod(String strWord) {
 
-		// преобразуваме вс.символи в големи
+		// preobrazuvame vs.simvoli v golemi
 		String kod = strWord.toUpperCase();
 
-		// заместваме в стринга всички символи "J" с "I"
+		// zamestvame v stringa vsichki simvoli "J" s "I"
 		kod = kod.replaceAll("J", "I");
 
-		// [\d\s,:], премахваме всички цифри, всички интервали, , : ; . ! ?
+		// [\d\s,:], premahvame vsichki tsifri, vsichki intervali, , : ; . ! ?
 		String[] kodStr = kod.split("[\\d\\s,:;.!?]+");
 
-		// преобразуваме масива в сринг
-		// със StringBuilder за да спестим време и ресурси
+		// preobrazuvame masiva v sring
+		// sas StringBuilder za da spestim vreme i resursi
 		StringBuilder encodingText = new StringBuilder();
 		for (String chap : kodStr) {
 			encodingText.append(chap);
@@ -25,13 +25,13 @@ public class PlayfairCipher {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
-		// Въвеждаме текста за кодиране
-		System.out.print("Въведете текста за кодиране! ");
+		// Vavezhdame teksta za kodirane
+		System.out.print("Enter the text encoding! ");
 		String strWord = input.nextLine();
 
 		StringBuilder encodingText = UpAndSplitMetod(strWord);
 
-		// добавяме 'Х' м/у еднакви символи
+		// дobavyame 'X' m/u ednakvi simvoli
 		StringBuilder textWithX = new StringBuilder();
 		char sim = encodingText.charAt(0);
 		textWithX.append(sim);
@@ -43,12 +43,12 @@ public class PlayfairCipher {
 			textWithX.append(encodingText.charAt(i));
 		}
 
-		// добавяме 'X' за четност на реда
+		// dobavyame 'X' za chetnost na reda
 		if (textWithX.length() % 2 != 0) {
 			textWithX.append('X');
 		}
 
-		// разделяме текста на двойки
+		// razdelyame teksta na dvoyki
 		int n = textWithX.length() / 2;
 		String[] dw = new String[n];
 		for (int i = 0; i < n; i++) {
@@ -56,29 +56,29 @@ public class PlayfairCipher {
 		}
 		int nDW = n;
 
-		// Въвеждаме кодиращата дума
-		System.out.print("Въведете кодиращата дума! ");
+		// Vavezhdame kodirashtata duma
+		System.out.print("Enter the codeword! ");
 		strWord = input.nextLine();
 
-		// към текста добавяме всичките букви от лат.азбука
+		// kam teksta dobavyame vsichkite bukvi ot lat.azbuka
 		strWord = strWord + "abcdefghiklmnopqrstuvwxyz";
 
 		StringBuilder kod = UpAndSplitMetod(strWord);
 
-		// инициализираме променлива n с дължината на стринга
+		// initsializirame promenliva n s dalzhinata na stringa
 		n = kod.length();
 
-		// и нов стринг с дължина - броя на лат.азбука
+		// i nov string s dalzhina - broya na lat.azbuka
 		char[] arrayT = new char[25];
 		int m = 0;
-		boolean f = false;// флаг за повтарящ се символ
+		boolean f = false;// flag za povtaryasht se simvol
 
-		arrayT[0] = kod.charAt(0);// на първа позиция в новия масив слагаме
-									// първия символ от стринга
+		arrayT[0] = kod.charAt(0);// na parva pozitsiya v noviya masiv slagame
+									// parviya simvol ot stringa
 
-		// превъртаме чрез цикъл всеки символ на стринга и го сравняваме с
-		// елементите от масива arrayT. Когато няма съвпадение го добавяме, като
-		// следващ в масива
+		// prevartame chrez tsikal vseki simvol na stringa i go sravnyavame s
+		// elementite ot masiva arrayT. Kogato nyama savpadenie go dobavyame, kato
+		// sledvasht v masiva
 		for (int i = 0; i < n; i++) {
 			f = false;
 			for (int j = 0; j <= m; j++) {
@@ -94,8 +94,8 @@ public class PlayfairCipher {
 			}
 		}
 
-		// пренареждане в матричен вид
-		System.out.println("\nТаблицата за кодиране е:");
+		// prenarezhdane v matrichen vid
+		System.out.println("\nThe codetable is:");
 		char[][] kodTable = new char[5][5];
 		int k = 0;
 		for (int i = 0; i < 5; i++) {
@@ -115,7 +115,7 @@ public class PlayfairCipher {
 			System.out.println();
 		}
 
-		System.out.println("\nЗакодирането на сричките е:");
+		System.out.println("\nEncoded the letters is:");
 
 		int ia = 0;
 		int ib = 0;
@@ -123,23 +123,23 @@ public class PlayfairCipher {
 		int jb = 0;
 		String sr = null;
 
-		// инициализираме масив в които ще запишем новите закодирани срички
+		// initsializirame masiv v koito shte zapishem novite zakodirani srichki
 		String[] dw2 = new String[nDW];
 
-		// обхождаме масива от срички
+		// obhozhdame masiva ot srichki
 		for (int p = 0; p < nDW; p++) {
-			char aDW = dw[p].charAt(0); // първа буква от сричката
-			char bDW = dw[p].charAt(1); // втора буква от сричката
+			char aDW = dw[p].charAt(0); // parva bukva ot srichkata
+			char bDW = dw[p].charAt(1); // vtora bukva ot srichkata
 
-			// два цикъла за обхождате на таблицата за разкодиране
+			// dva tsikala za obhozhdate na tablitsata za razkodirane
 			for (int i = 0; i < 5; i++) {
 				for (int j = 0; j < 5; j++) {
-					// проверка къде се намира в таблицата първата буква
+					// proverka kade se namira v tablitsata parvata bukva
 					if (kodTable[i][j] == aDW) {
 						ia = i;
 						ja = j;
 					}
-					// проверка къде се намира в таблицата втората буква
+					// proverka kade se namira v tablitsata vtorata bukva
 					if (kodTable[i][j] == bDW) {
 						ib = i;
 						jb = j;
@@ -147,15 +147,15 @@ public class PlayfairCipher {
 				}
 			}
 
-			// когато символите са в правоъгълник
+			// kogato simvolite sa v pravoagalnik
 			if ((ia != ib) && (ja != jb)) {
-				sr = "<>";// обозначавам, че двойката букви са в правоъгълник
+				sr = "<>";// oboznachavam, che dvoykata bukvi sa v pravoagalnik
 				aDW = kodTable[ia][jb];
 				bDW = kodTable[ib][ja];
 			}
-			// когато символите са на един ред
+			// kogato simvolite sa na edin red
 			if ((ia == ib) && (ja != jb)) {
-				sr = "-";// обозначавам, че двойката букви са в редица
+				sr = "-";// oboznachavam, che dvoykata bukvi sa v reditsa
 				if (ja == 4) {
 					ja = 0;
 					// if (ia == 4) {
@@ -176,9 +176,9 @@ public class PlayfairCipher {
 					jb = jb + 1;
 				bDW = kodTable[ib][jb];
 			}
-			// когато символите са в една колона
+			// kogato simvolite sa v edna kolona
 			if ((ja == jb) && (ia != ib)) {
-				sr = "|"; // обозначавам, че двойката букви са в колона
+				sr = "|"; // oboznachavam, che dvoykata bukvi sa v kolona
 				if (ia == 4) {
 					ia = 0;
 					// if (ja == 4) {
@@ -199,11 +199,11 @@ public class PlayfairCipher {
 					ib = ib + 1;
 				bDW = kodTable[ib][jb];
 			}
-			// записваме закодираната сричка в поредния елемент на масива
+			// zapisvame zakodiranata srichka v poredniya element na masiva
 			dw2[p] = "" + aDW + bDW;
 			System.out.println(dw[p] + " " + sr + " " + dw2[p]);
 		}
-		System.out.println("\nЗакодираният текст е:");
+		System.out.println("\nEncrypted text:");
 		for (int i = 0; i < dw2.length; i++) {
 			System.out.print(dw2[i] + " ");
 		}
