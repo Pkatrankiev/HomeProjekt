@@ -10,9 +10,9 @@ public class PlayfairCipher {
 		// zamestvame v stringa vsichki simvoli "J" s "I"
 		kod = kod.replaceAll("J", "I");
 
-		// [\d\s,:], premahvame vsichki tsifri, vsichki intervali, , : ; . ! ?
-		String[] kodStr = kod.split("[\\d\\s,:;.!?]+");
-
+		// premahvame vsichki simvoli razlichni ot bukvi
+		String[] kodStr = kod.split("[^A-Z]+");
+		
 		// preobrazuvame masiva v sring
 		// sas StringBuilder za da spestim vreme i resursi
 		StringBuilder encodingText = new StringBuilder();
@@ -31,7 +31,7 @@ public class PlayfairCipher {
 
 		StringBuilder encodingText = UpAndSplitMetod(strWord);
 
-		// äobavyame 'X' m/u ednakvi simvoli
+		// dobavyame 'X' m/u ednakvi simvoli
 		StringBuilder textWithX = new StringBuilder();
 		char sim = encodingText.charAt(0);
 		textWithX.append(sim);
