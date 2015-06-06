@@ -12,7 +12,7 @@ public class PlayfairCipher {
 
 		// premahvame vsichki simvoli razlichni ot bukvi
 		String[] kodStr = kod.split("[^A-Z]+");
-		
+
 		// preobrazuvame masiva v sring
 		// sas StringBuilder za da spestim vreme i resursi
 		StringBuilder encodingText = new StringBuilder();
@@ -77,9 +77,9 @@ public class PlayfairCipher {
 									// parviya simvol ot stringa
 
 		// prevartame chrez tsikal vseki simvol na stringa i go sravnyavame s
-		// elementite ot masiva arrayT. Kogato nyama savpadenie go dobavyame, kato
-		// sledvasht v masiva
-		for (int i = 0; i < n; i++) {
+		// elementite ot masiva arrayT. Kogato nyama savpadenie go dobavyame,
+		// kato	sledvasht v masiva
+		for (int i = 1; i < n; i++) {
 			f = false;
 			for (int j = 0; j <= m; j++) {
 
@@ -100,13 +100,8 @@ public class PlayfairCipher {
 		int k = 0;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (k <= m) {
-					kodTable[i][j] = arrayT[k];
-					k++;
-				} else {
-					break;
-
-				}
+				kodTable[i][j] = arrayT[k];
+				k++;
 				if (kodTable[i][j] == 'I') {
 					System.out.print("i/j" + " ");
 				} else
