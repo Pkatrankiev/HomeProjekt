@@ -30,6 +30,10 @@ public class PlayfairCipher {
 		String strWord = input.nextLine();
 
 		StringBuilder encodingText = UpAndSplitMetod(strWord);
+		
+		//proverka za korektnost na teksta
+		if(encodingText.length()>0){
+		
 
 		// dobavyame 'X' m/u ednakvi simvoli
 		StringBuilder textWithX = new StringBuilder();
@@ -202,5 +206,6 @@ public class PlayfairCipher {
 		for (int i = 0; i < dw2.length; i++) {
 			System.out.print(dw2[i] + " ");
 		}
-	}
+	}else System.out.print("Not correct text!");
+}
 }
