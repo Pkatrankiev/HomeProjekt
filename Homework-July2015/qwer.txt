@@ -1,0 +1,20 @@
+Ivan, 0888 123 456   , ivan@abv.bg     
+With address: Vraca, N.Voidivodov, 4A 
+In Category: Family 
+
+
+Pesho, 0888 223344    , Pesho@abv.bg    
+With address: Pleven,  Leonova, 60 
+In Category: Colleagues 
+
+
+Irina, 0888 887777    , Irina@abv.bg    
+With address: Sofia, Hr.Botev, 12A 
+In Category: Friends 
+
+
+qq, ww             , ee              
+With address: rrt  ,       tt, yy 
+In Category: Colleagues 
+
+
