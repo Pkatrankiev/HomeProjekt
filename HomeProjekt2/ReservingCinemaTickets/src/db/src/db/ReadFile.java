@@ -36,7 +36,6 @@ public class ReadFile {
 			try {
 
 				sc = new Scanner(f);
-			int line = 0;
 				while (sc.hasNextLine()) {
 					String textLine = sc.nextLine();
 
@@ -56,7 +55,6 @@ public class ReadFile {
 								countDate++;
 								if (countDate == 7) {
 									flDate = false;
-									
 								}
 							} else {
 								if (cont < 9) {
@@ -138,14 +136,13 @@ public class ReadFile {
 						}
 
 					}
-					if (line>0) {
+
 					CinemaTheater CnmTat = new CinemaTheater(indeksMovie,
 							CinemaName, CinemaAdress, dateMovie, timeMovie,
 							price, CinemaLines, CinemaColums, massive);
-					System.out.println(" time "+timeMovie);
+
 					CinemaTheater.getListCinemaTheater().add(CnmTat);
-					}
-				line++;
+
 				}
 
 			} catch (FileNotFoundException e) {
@@ -162,25 +159,11 @@ public class ReadFile {
 		} else {
 			System.out.println("No such file");
 		}
-//		for (int i = 0; i < CinemaTheater.getListCinemaTheater().size(); i++) {
+//		for (int i = 0; i < ListdateWeek.size(); i++) {
+//			String date = sdf.format(ListdateWeek.get(i));
+//			System.out.println(date);
 //
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getName());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getAdres());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getDate());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getTime());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getPrice());
-//			int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
-//			System.out.println(ll);
-//			int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
-//			System.out.println(cc);
-//			int sum = 0;
-//			for (int j = 0; j < ll; j++) {
-//				for (int j2 = 0; j2 < cc; j2++) {
-//				sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];	
-//				}
-//				}System.out.println(sum);
-//				}
+//		}
 	}
 
 	public static void readMovieFile() {

@@ -69,28 +69,28 @@ import db.Movie;
 		}
 
 		
-//			public ListTimeForCurentDateScreen(int x, int y, 
-//					Date[] listTime,int countListTime) {
-//				
-//			setLayout(null);
-//			
-//			int whithc = 25*countListTime;
-//			System.out.println("www  "+whithc+" x  "+x+" y  "+y);
-//			
-//			JPanel panel = new JPanel();
-//			panel.setBounds(10, 10, 100, 300);
-////			panel.setBounds(x, y, 80, whithc);
-//			add(panel);
-//			panel.setLayout(null);
-//			
-//			for (int i = 0; i < listTime.length; i++) {
-//			
-//			JButton button = new JButton("New button");
-//			button.setBounds(x, y, 80, 25);
-//			y=y+25;
-//			panel.add(button);
-//			}
-//		}
+			public ListTimeForCurentDateScreen(int x, int y, 
+					Date[] listTime,int countListTime) {
+				
+			setLayout(null);
+			
+			int whithc = 25*countListTime;
+			System.out.println("www  "+whithc+" x  "+x+" y  "+y);
+			
+			JPanel panel = new JPanel();
+			panel.setBounds(10, 10, 100, 300);
+//			panel.setBounds(x, y, 80, whithc);
+			add(panel);
+			panel.setLayout(null);
+			
+			for (int i = 0; i < listTime.length; i++) {
+			
+			JButton button = new JButton("New button");
+			button.setBounds(x, y, 80, 25);
+			y=y+25;
+			panel.add(button);
+			}
+		}
 	}
 
 	

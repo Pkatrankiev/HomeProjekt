@@ -51,8 +51,10 @@ public class MovieListTheaterScreen extends JFrame {
 			ButtonTimeList(TheaterForCurenMovieList, xx, y, i, k);
 			xx = xx+ 90;
 			}
-			}
+			
 		}
+
+	}
 
 	private void ButtonTimeList(
 			ArrayList<CinemaTheater> TheaterForCurenMovieList, int x, int y,
@@ -63,7 +65,7 @@ public class MovieListTheaterScreen extends JFrame {
 		
 		JButton btnTimeList1 = new JButton(date);
 		  final JPopupMenu menu = new JPopupMenu("Menu");
-		
+		  System.out.println("kkkkkkkkkkkkk");
           menu.add("A");
           menu.add("B");
           menu.add("C");

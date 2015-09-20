@@ -7,8 +7,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -51,8 +49,10 @@ public class MovieListTheaterScreen extends JFrame {
 			ButtonTimeList(TheaterForCurenMovieList, xx, y, i, k);
 			xx = xx+ 90;
 			}
-			}
+			
 		}
+
+	}
 
 	private void ButtonTimeList(
 			ArrayList<CinemaTheater> TheaterForCurenMovieList, int x, int y,
@@ -60,19 +60,7 @@ public class MovieListTheaterScreen extends JFrame {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
 		System.out.println(CinemaTheater.getListdateWeek().get(k));
 		String date = sdf.format(CinemaTheater.getListdateWeek().get(k));
-		
 		JButton btnTimeList1 = new JButton(date);
-		  final JPopupMenu menu = new JPopupMenu("Menu");
-		
-          menu.add("A");
-          menu.add("B");
-          menu.add("C");
-          btnTimeList1.addActionListener( new ActionListener() {
-              public void actionPerformed(ActionEvent ae) {
-                  menu.show(btnTimeList1, btnTimeList1.getWidth()/2, btnTimeList1.getHeight()/2);
-              }
-          } );
-          
 		btnTimeList1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

@@ -48,12 +48,12 @@ public class ButtonTheaterListener implements ActionListener {
 //		// TODO Auto-generated constructor stub
 //	}
 
-//	@Ovehrride
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 //		String str = theaterCurentMovie.getName();
 
-//			new TheaterMovieProgramScreen().setVisible(true);
+			new TheaterMovieProgramScreen().setVisible(true);
 	}
 
 	private ArrayList<CinemaTheater> ListTheaterInMovie(int x) {
