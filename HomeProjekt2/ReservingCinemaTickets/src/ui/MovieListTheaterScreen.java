@@ -1,6 +1,7 @@
 package ui;
 
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -17,14 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import logic.ButtonListener;
 import logic.ButtonProjectionListener;
-import logic.ButtonTheaterListener;
 import db.CinemaTheater;
 
 import javax.swing.JPopupMenu;
 
-import java.awt.Component;
+
 
 public class MovieListTheaterScreen extends JFrame {
 
@@ -102,11 +101,12 @@ public class MovieListTheaterScreen extends JFrame {
 		btnTimeList.setToolTipText("Кликни за да избереш");
 		btnTimeList.setBounds(x, y, 80, 25);
 		contentPane.add(btnTimeList);
-
 		
-		CinemaTheater cinemaTheater = TheaterForCurenMovieList.get(i);
-//		btnTimeList1.addActionListener(new ButtonTheaterListener(cinemaTheater,
-//				day));
+		JLabel lblNewLabel_1 = new JLabel("DounLine");
+		lblNewLabel_1.setIcon(new ImageIcon("line2.png"));
+		lblNewLabel_1.setBounds(0, 536, 892, 30);
+		contentPane.add(lblNewLabel_1);
+
 	}
 
 	private void TheaterNameLabel(

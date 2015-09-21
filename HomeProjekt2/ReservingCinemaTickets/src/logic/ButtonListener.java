@@ -3,9 +3,7 @@ package logic;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import ui.MovieListTheaterScreen;
-import ui.ScreenTest;
 import db.CinemaTheater;
 import db.Movie;
 

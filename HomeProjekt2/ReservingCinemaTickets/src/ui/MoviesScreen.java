@@ -45,13 +45,6 @@ public class MoviesScreen extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Филмите тази седмица");
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				new DateScreen().setVisible(true);
-			}
-		});
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
 		lblNewLabel.setBounds(10, 10, 488, 25);
 		contentPane.add(lblNewLabel);
@@ -60,11 +53,7 @@ public class MoviesScreen extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon("line1.png"));
 		lblNewLabel_1.setBounds(0, 536, 892, 30);
 		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(10, 35, 605, 20);
-		contentPane.add(lblNewLabel_2);
-		
+	
 		int x = 20;
 		int y = 65;
 		int line;
