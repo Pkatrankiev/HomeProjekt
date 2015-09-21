@@ -49,6 +49,21 @@ public class MoviesScreen extends JFrame {
 		lblNewLabel.setBounds(10, 10, 488, 25);
 		contentPane.add(lblNewLabel);
 		
+		JButton btnProgram = new JButton("ПРОГРАМА");
+		btnProgram.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btnProgram.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		btnProgram.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnProgram.setToolTipText("Кликни за да избереш");
+		btnProgram.setBounds(720, 20, 150, 30);
+		contentPane.add(btnProgram);
+		
 		JLabel lblNewLabel_1 = new JLabel("DounLine");
 		lblNewLabel_1.setIcon(new ImageIcon("line1.png"));
 		lblNewLabel_1.setBounds(0, 536, 892, 30);
@@ -79,20 +94,7 @@ public class MoviesScreen extends JFrame {
 		}
 		
 			
-//			JButton btnMovie = new JButton("");
-//			btnMovie.addMouseListener(new MouseAdapter() {
-//				@Override
-//				public void mouseClicked(MouseEvent arg0) {
-//				}
-//			});
-//			btnMovie.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent arg0) {
-//				}
-//			});
-//			btnMovie.setToolTipText("Кликни за да избереш");
-//			btnMovie.setIcon(new ImageIcon("C:\\Documents and Settings\\ibm\\Desktop\\2.jpg"));
-//			btnMovie.setBounds(x, 300, 150, 220);
-//			contentPane.add(btnMovie);
+		
 //			
 //			JLabel lblNewLabel_3 = new JLabel("New label");
 //			lblNewLabel_3.setBounds(20, 85, 872, 470);

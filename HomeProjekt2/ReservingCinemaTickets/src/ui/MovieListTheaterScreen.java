@@ -39,14 +39,15 @@ public class MovieListTheaterScreen extends JFrame {
 		contentPane.setLayout(null);
 		
 		int x = 10;
-		int y = 10;
+		int y = 150;
 
 		int cc = TheaterForCurenMovieList.size();
 		System.out.println("list " + cc);
 		for (int i = 0; i < cc; i++) {
 			
-			y = 10 + i * 37;
-			TheaterNameLabel(TheaterForCurenMovieList, x, y, i);
+			y = y + i * 37;
+			TheaterNameLabel(TheaterForCurenMovieList, x, (y-6), i);
+			
 			int xx = 220;
 			for (int k = 0; k < 7; k++) {
 			
