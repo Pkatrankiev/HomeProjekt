@@ -25,6 +25,7 @@ public class ButtonTheaterListener implements ActionListener {
 		this.TheaterCurentMovie = TheaterCurentMovie;
 	}
 
+	
 //	private CinemaTheater TheaterCurentMovie;
 //	private Date day;
 //
@@ -35,10 +36,10 @@ public class ButtonTheaterListener implements ActionListener {
 
 
 
-//	public ButtonTheaterListener(CinemaTheater theaterCurentMovie, Date day) {
-//		// TODO Auto-generated constructor stub
-//		
-//	}
+	public void ButtonTheaterListener1(CinemaTheater theaterCurentMovie, Date day) {
+		// TODO Auto-generated constructor stub
+		System.out.println("  hhhhh jjjj jj");
+	}
 
 
 

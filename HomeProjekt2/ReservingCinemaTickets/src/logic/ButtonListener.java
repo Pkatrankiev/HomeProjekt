@@ -20,7 +20,9 @@ public class ButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		int cc = CinemaTheater.getListCinemaTheater().size();
 		ArrayList<CinemaTheater> theaterList = new ArrayList<CinemaTheater>();
+		
 		theaterList = ListTheaterInMovie(x);
+		
 		new MovieListTheaterScreen(theaterList).setVisible(true);
 	}
 

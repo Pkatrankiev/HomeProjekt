@@ -49,8 +49,7 @@ public class MoviesScreen extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				System.out.println(" - - - - - -");
-				new PanelTest().setVisible(true);
+				new DateScreen().setVisible(true);
 			}
 		});
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));

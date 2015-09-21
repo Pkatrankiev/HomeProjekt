@@ -2,6 +2,7 @@ package ui;
 
 
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import logic.ButtonListener;
+import logic.ButtonProjectionListener;
 import logic.ButtonTheaterListener;
 import db.CinemaTheater;
 
@@ -51,48 +54,59 @@ public class MovieListTheaterScreen extends JFrame {
 			ButtonTimeList(TheaterForCurenMovieList, xx, y, i, k);
 			xx = xx+ 90;
 			}
-			}
+			
 		}
+
+	}
 
 	private void ButtonTimeList(
 			ArrayList<CinemaTheater> TheaterForCurenMovieList, int x, int y,
 			int i, int k) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
-		System.out.println(CinemaTheater.getListdateWeek().get(k));
-		String date = sdf.format(CinemaTheater.getListdateWeek().get(k));
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		System.out.println(" uu "+CinemaTheater.getListdateWeek().get(k));
 		
-		JButton btnTimeList1 = new JButton(date);
+		Date day =CinemaTheater.getListdateWeek().get(k);
+		
+		String date = sdf.format(day);
+		
+		String theaterName = TheaterForCurenMovieList.get(i).getName();
+		int indexMovie = TheaterForCurenMovieList.get(i).getIndeksMovie();
+		
+		JButton btnTimeList = new JButton(date);
 		  final JPopupMenu menu = new JPopupMenu("Menu");
 		
-          menu.add("A");
-          menu.add("B");
-          menu.add("C");
-          btnTimeList1.addActionListener( new ActionListener() {
-              public void actionPerformed(ActionEvent ae) {
-                  menu.show(btnTimeList1, btnTimeList1.getWidth()/2, btnTimeList1.getHeight()/2);
+		  CreatTimeList(stf,day,theaterName,indexMovie,menu);
+		  
+		 
+		  
+          btnTimeList.addActionListener( new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+            	  System.out.println(" uu    ooo ");
+                  menu.show(btnTimeList, btnTimeList.getWidth()/2, btnTimeList.getHeight()/2);
               }
           } );
           
-		btnTimeList1.addMouseListener(new MouseAdapter() {
+		btnTimeList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnTimeList1.setBackground(Color.GRAY);
+				btnTimeList.setBackground(Color.GRAY);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnTimeList1.setBackground(Color.WHITE);
+				btnTimeList.setBackground(Color.WHITE);
 			}
 		});
-		btnTimeList1.setBackground(Color.WHITE);
-		btnTimeList1.setToolTipText("Кликни за да избереш");
-		btnTimeList1.setBounds(x, y, 80, 25);
-		contentPane.add(btnTimeList1);
+		btnTimeList.setBackground(Color.WHITE);
+		btnTimeList.setToolTipText("Кликни за да избереш");
+		btnTimeList.setBounds(x, y, 80, 25);
+		contentPane.add(btnTimeList);
 
-		Date day1 = CinemaTheater.getListdateWeek().get(k);
+		
 		CinemaTheater cinemaTheater = TheaterForCurenMovieList.get(i);
-		btnTimeList1.addActionListener(new ButtonTheaterListener(cinemaTheater,
-				day1));
+//		btnTimeList1.addActionListener(new ButtonTheaterListener(cinemaTheater,
+//				day));
 	}
 
 	private void TheaterNameLabel(
@@ -110,5 +124,40 @@ public class MovieListTheaterScreen extends JFrame {
 		theaterNameLabel.setBounds(x, y, 200, 35);
 		contentPane.add(theaterNameLabel);
 	}
+
+	
+	private void CreatTimeList(SimpleDateFormat stf, Date day1,
+			String theaterName, int indexMovie, final JPopupMenu menu) {
+		Date time;
+		for (int j = 0; j < CinemaTheater.getListCinemaTheater().size(); j++) {
+			  
+			if(day1.equals(CinemaTheater.getListCinemaTheater().get(j).getDate())
+					&& theaterName.equals(CinemaTheater.getListCinemaTheater().get(j).getName())
+					&& indexMovie == CinemaTheater.getListCinemaTheater().get(j).getIndeksMovie()){
+				
+			time = 	CinemaTheater.getListCinemaTheater().get(j).getTime();
+			CinemaTheater TheaterProjection = CinemaTheater.getListCinemaTheater().get(j);
+			JMenuItem mntmNewMenuItem = TimeListItem(stf, time,TheaterProjection);
+			
+			System.out.println(day1+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getDate());
+			System.out.println(theaterName+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getName());
+			System.out.println(indexMovie+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getIndeksMovie());
+			
+			 menu.add(mntmNewMenuItem);
+	}
+	
+		  }
+	}
+			
+	private JMenuItem TimeListItem(SimpleDateFormat stf, Date time, CinemaTheater theaterProjection) {
+			
+				
+		JMenuItem mntmNewMenuItem = new JMenuItem(stf.format(time));
+				
+				mntmNewMenuItem.addActionListener(new ButtonProjectionListener(theaterProjection));
+				
+				
+				return mntmNewMenuItem;
+			}
 
 }
