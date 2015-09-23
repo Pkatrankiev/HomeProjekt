@@ -37,40 +37,45 @@ public class ButtonListener implements ActionListener {
 		String theater;
 		int count = 0;
 		boolean fl = true;
-		boolean fl1 = false;
+		boolean fl1 = true;
+//		System.out.println("theaterNameList = "+cc);
 		for (int i = 0; i < cc; i++) {
 			if (CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie() == indexMovie) {
 				theater = CinemaTheater.getListCinemaTheater().get(i).getName();
+				
 				if (fl) {
 					theaterNameList[0] = theater;
-					theaterList
-							.add(CinemaTheater.getListCinemaTheater().get(i));
+					theaterList.add(CinemaTheater.getListCinemaTheater().get(i));
 					count++;
 					fl = false;
 				}
+//				System.out.println(" count "+count+" <> theater "+theater);
 				for (int j = 0; j < count; j++) {
-					if (!theaterNameList[j].equals(theater)) {
-						fl1 = true;
-
-					}
+//					System.out.println(j+" theaterNameList[j] = "+theaterNameList[j]);
+//					System.out.println(i+" theater = "+theater+"  "+fl1);
+					if (theaterNameList[j].equals(theater)) {
+						fl1 = false;
+						 
+						}else fl1 = true;
 				}
+				
+				
 				if (fl1) {
-					theaterList
-							.add(CinemaTheater.getListCinemaTheater().get(i));
+					theaterList.add(CinemaTheater.getListCinemaTheater().get(i));
 					theaterNameList[count] = theater;
-					System.out.println(" - _"
-							+ theaterList.get(count).getName());
+//					System.out.println(count+" - "+ theaterList.get(count).getName());
 					count++;
+					fl1 = true;
 				}
 			}
 
 		}
 		for (int i = 0; i < count; i++) {
-			System.out.println(theaterNameList[i]);
+//			System.out.println(theaterNameList[i]);
 		}
 		for (int i = 0; i < count; i++) {
 			theater = theaterList.get(i).getName();
-			System.out.println(theater);
+//			System.out.println(theater);
 		}
 		return theaterList;
 	}

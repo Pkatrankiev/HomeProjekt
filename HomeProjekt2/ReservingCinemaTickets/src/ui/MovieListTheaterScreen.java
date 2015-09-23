@@ -45,9 +45,10 @@ public class MovieListTheaterScreen extends JFrame {
 
 		int cc = TheaterForCurenMovieList.size();
 		System.out.println("list " + cc);
+		System.out.println();
 		for (int i = 0; i < cc; i++) {
 			
-			y = y + i * 37;
+			y = y + 37;
 			TheaterNameLabel(TheaterForCurenMovieList, x, (y-6), i);
 			
 			int xx = 220;
@@ -66,13 +67,14 @@ public class MovieListTheaterScreen extends JFrame {
 			int i, int k) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
 		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdtf = new SimpleDateFormat("dd.MM-HH:mm");
 		System.out.println(" uu "+CinemaTheater.getListdateWeek().get(k));
 		
 		Date day =CinemaTheater.getListdateWeek().get(k);
 		Date dayNau =  new Date();
-		String str = sdf.format(dayNau);
+		String str = sdtf.format(dayNau);
 		try {
-			dayNau = sdf.parse(str);
+			dayNau = sdtf.parse(str);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -86,11 +88,17 @@ public class MovieListTheaterScreen extends JFrame {
 		JButton btnTimeList = new JButton(date);
 		  final JPopupMenu menu = new JPopupMenu("Menu");
 		
-		  CreatTimeList(stf,day,theaterName,indexMovie,menu);
+		  int count = CreatTimeList(stf,day,dayNau, theaterName,indexMovie,menu);
+		  String str1 = sdtf.format(day);
+		  try {
+			day = sdtf.parse(str1);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		  
-		  System.out.println("data "+sdf.format(day)+"dnes "+sdf.format(dayNau));
-		  
-		  if (day.after(dayNau)){
+		  System.out.println("count list "+count); 
+		  if (count>0){
 				
 			
           btnTimeList.addActionListener( new ActionListener() {
@@ -144,27 +152,45 @@ public class MovieListTheaterScreen extends JFrame {
 	}
 
 	
-	private void CreatTimeList(SimpleDateFormat stf, Date day1,
+	private  int CreatTimeList(SimpleDateFormat stf, Date day1,Date dayNau,
 			String theaterName, int indexMovie, final JPopupMenu menu) {
+		int count = 0;
 		Date time;
+		Date DateAndTime;
+		SimpleDateFormat sdtf = new SimpleDateFormat("dd.MM-HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
 		for (int j = 0; j < CinemaTheater.getListCinemaTheater().size(); j++) {
-			  
-			if(day1.equals(CinemaTheater.getListCinemaTheater().get(j).getDate())
+			 String str = sdf.format(CinemaTheater.getListCinemaTheater().get(j).getDate()); 
+			 Date Date = null;
+			try {
+				Date = sdf.parse(str);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(		day1.equals(Date)
 					&& theaterName.equals(CinemaTheater.getListCinemaTheater().get(j).getName())
 					&& indexMovie == CinemaTheater.getListCinemaTheater().get(j).getIndeksMovie()){
 				
+				DateAndTime = CinemaTheater.getListCinemaTheater().get(j).getDate();
+				System.out.println("data "+sdtf.format(DateAndTime)+" -> dnes "+sdtf.format(dayNau));
+				if (DateAndTime.after(dayNau)){
+				
 			time = 	CinemaTheater.getListCinemaTheater().get(j).getTime();
 			CinemaTheater TheaterProjection = CinemaTheater.getListCinemaTheater().get(j);
-			JMenuItem mntmNewMenuItem = TimeListItem(stf, time,TheaterProjection);
+			JMenuItem mntmNewMenuItem = TimeListItem(stf, time, TheaterProjection);
 			
 			System.out.println(day1+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getDate());
 			System.out.println(theaterName+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getName());
 			System.out.println(indexMovie+" <"+j+"> "+CinemaTheater.getListCinemaTheater().get(j).getIndeksMovie());
 			
 			 menu.add(mntmNewMenuItem);
+			 count++;
+			 
 	}
+			}
 	
-		  }
+		  }return count;
 	}
 			
 	private JMenuItem TimeListItem(SimpleDateFormat stf, Date time, CinemaTheater theaterProjection) {

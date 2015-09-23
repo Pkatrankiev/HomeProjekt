@@ -20,9 +20,11 @@ public class ReadFile {
 		int CinemaLines = 0;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
 		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdtf = new SimpleDateFormat("dd.MM-HH:mm");
 		List<Date> ListdateWeek = new ArrayList<>();
 		Date dateMovie = null;
 		Date timeMovie = null;
+		Date dateItime = null;
 		float price = 0;
 		boolean flDate = true;
 		int countDate = 0;
@@ -39,7 +41,7 @@ public class ReadFile {
 			int line = 0;
 				while (sc.hasNextLine()) {
 					String textLine = sc.nextLine();
-
+					String DateAndTime = new String();
 					StringBuilder text = new StringBuilder();
 					cont = 1;
 					y = 0;
@@ -85,12 +87,14 @@ public class ReadFile {
 									case 4: {
 										String str = text.toString();
 										str = str.trim();
+										DateAndTime = str;
 										dateMovie = sdf.parse(str);
 									}
 										break;
 									case 5: {
 										String str = text.toString();
 										str = str.trim();
+										DateAndTime = DateAndTime +"-"+ str;
 										timeMovie = stf.parse(str);
 									}
 										break;
@@ -141,11 +145,14 @@ public class ReadFile {
 
 					}
 					if (line>0) {
+						dateMovie = sdtf.parse(DateAndTime);
 					CinemaTheater CnmTat = new CinemaTheater(indeksMovie,
 							CinemaName, CinemaAdress, dateMovie, timeMovie,
 							price, CinemaLines, CinemaColums, massive);
-					System.out.println(" time "+timeMovie);
-					System.out.println(" date "+dateMovie);
+					
+//					System.out.println(" time "+timeMovie);
+//					System.out.println(" date "+dateMovie);
+//					System.out.println(" date and time "+DateAndTime);
 					CinemaTheater.getListCinemaTheater().add(CnmTat);
 					}
 				line++;
