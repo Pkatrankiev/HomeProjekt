@@ -102,7 +102,7 @@ public class MovieListTheaterScreen extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		  
+//		  TheaterProjectionScreen();
 		  System.out.println("count list "+count); 
 		  if (count>0){
 				

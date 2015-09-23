@@ -2,40 +2,28 @@ package ui;
 
 
 import logic.ButtonListener;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
 import java.awt.Font;
-
 import javax.swing.ImageIcon;
-
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JTable;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import db.CinemaTheater;
 import db.Movie;
-import db.ReadFile;
 
 public class MoviesScreen extends JFrame {
 
 	private JPanel contentPane;
 
-//	private JButton[] btnMovie;
+
 	public MoviesScreen() {
-//		this.btnMovie = new JButton[]	;
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
@@ -55,15 +43,18 @@ public class MoviesScreen extends JFrame {
 		
 		JButton btnProgram = new JButton("ПРОГРАМА");
 		btnProgram.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		btnProgram.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-		});
+
 		btnProgram.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+				Date dayNau = new Date();
+				String Date = sdf.format(dayNau);
+				String theaterName = CinemaTheater.getListCinemaTheater().get(0).getName();
+				new ProgramScreen(Date, theaterName).setVisible(true);
 			}
 		});
+		
 		btnProgram.setToolTipText("Кликни за да избереш");
 		btnProgram.setBounds(720, 20, 150, 30);
 		contentPane.add(btnProgram);
