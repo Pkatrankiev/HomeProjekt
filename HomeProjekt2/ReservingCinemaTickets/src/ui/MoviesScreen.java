@@ -44,10 +44,14 @@ public class MoviesScreen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+						
 		JLabel lblNewLabel = new JLabel("Филмите тази седмица");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(10, 10, 488, 25);
 		contentPane.add(lblNewLabel);
+		
+		
 		
 		JButton btnProgram = new JButton("ПРОГРАМА");
 		btnProgram.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -68,6 +72,8 @@ public class MoviesScreen extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon("line1.png"));
 		lblNewLabel_1.setBounds(0, 536, 892, 30);
 		contentPane.add(lblNewLabel_1);
+		
+		
 	
 		int x = 20;
 		int y = 65;
@@ -100,6 +106,12 @@ public class MoviesScreen extends JFrame {
 //			lblNewLabel_3.setBounds(20, 85, 872, 470);
 //			contentPane.add(lblNewLabel_3);
 //			x=x+175;
+		
+		JLabel lblBackground = new JLabel("");
+		lblBackground.setIcon(new ImageIcon("cinema-background.jpg"));
+		lblBackground.setBounds(0, 0, 900, 600);
+		getContentPane().add(lblBackground);
+		
 	
 	}
 

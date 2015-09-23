@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +60,11 @@ public class MovieListTheaterScreen extends JFrame {
 			}
 			
 		}
+		
+		JLabel lblBackground = new JLabel("");
+		lblBackground.setIcon(new ImageIcon("cinema-background2.jpg"));
+		lblBackground.setBounds(0, 0, 900, 600);
+		getContentPane().add(lblBackground);
 
 	}
 
@@ -146,7 +152,8 @@ public class MovieListTheaterScreen extends JFrame {
 
 			}
 		});
-		theaterNameLabel.setBackground(Color.WHITE);
+		theaterNameLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		theaterNameLabel.setForeground(Color.WHITE);
 		theaterNameLabel.setBounds(x, y, 200, 35);
 		contentPane.add(theaterNameLabel);
 	}
