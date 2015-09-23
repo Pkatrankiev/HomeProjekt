@@ -51,9 +51,11 @@ public class ReadFile {
 							if (flDate) {
 								String str = text.toString();
 								str = str.trim();
+								System.out.println(" str123 "+str);
 								dateMovie = sdf.parse(str);
 								CinemaTheater.getListdateWeek().add(dateMovie);
 								countDate++;
+								System.out.println(" date123 "+sdf.format(dateMovie));
 								if (countDate == 7) {
 									flDate = false;
 									
@@ -143,6 +145,7 @@ public class ReadFile {
 							CinemaName, CinemaAdress, dateMovie, timeMovie,
 							price, CinemaLines, CinemaColums, massive);
 					System.out.println(" time "+timeMovie);
+					System.out.println(" date "+dateMovie);
 					CinemaTheater.getListCinemaTheater().add(CnmTat);
 					}
 				line++;

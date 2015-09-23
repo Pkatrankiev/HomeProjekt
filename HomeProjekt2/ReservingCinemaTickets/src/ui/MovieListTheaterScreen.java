@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.io.Console;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,6 +69,14 @@ public class MovieListTheaterScreen extends JFrame {
 		System.out.println(" uu "+CinemaTheater.getListdateWeek().get(k));
 		
 		Date day =CinemaTheater.getListdateWeek().get(k);
+		Date dayNau =  new Date();
+		String str = sdf.format(dayNau);
+		try {
+			dayNau = sdf.parse(str);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		String date = sdf.format(day);
 		
@@ -78,8 +88,11 @@ public class MovieListTheaterScreen extends JFrame {
 		
 		  CreatTimeList(stf,day,theaterName,indexMovie,menu);
 		  
-		 
+		  System.out.println("data "+sdf.format(day)+"dnes "+sdf.format(dayNau));
 		  
+		  if (day.after(dayNau)){
+				
+			
           btnTimeList.addActionListener( new ActionListener() {
               public void actionPerformed(ActionEvent e) {
             	  System.out.println(" uu    ooo ");
@@ -100,6 +113,10 @@ public class MovieListTheaterScreen extends JFrame {
 		});
 		btnTimeList.setBackground(Color.WHITE);
 		btnTimeList.setToolTipText("Кликни за да избереш");
+		
+		  }else{
+			  btnTimeList.setBackground(Color.GRAY); 
+		  }
 		btnTimeList.setBounds(x, y, 80, 25);
 		contentPane.add(btnTimeList);
 		
