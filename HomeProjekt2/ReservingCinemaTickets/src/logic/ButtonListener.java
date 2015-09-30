@@ -21,8 +21,8 @@ public class ButtonListener implements ActionListener {
 		ArrayList<CinemaTheater> theaterList = new ArrayList<CinemaTheater>();
 
 		theaterList = ListTheaterInMovie(x);
-
-		new MovieListTheaterScreen(theaterList).setVisible(true);
+		Movie curentMovie = Movie.getListMovie().get(x);
+		new MovieListTheaterScreen(theaterList, curentMovie).setVisible(true);
 	}
 
 	private ArrayList<CinemaTheater> ListTheaterInMovie(int x) {

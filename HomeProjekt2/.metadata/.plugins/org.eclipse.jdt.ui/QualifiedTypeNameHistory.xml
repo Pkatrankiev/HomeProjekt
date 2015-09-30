@@ -6,4 +6,9 @@
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="java.io.Console"/>
+<fullyQualifiedTypeName name="logic.ButtonScreenProgramListener"/>
+<fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
+<fullyQualifiedTypeName name="java.awt.Toolkit"/>
+<fullyQualifiedTypeName name="ui.ProgramScreen"/>
+<fullyQualifiedTypeName name="db.Movie"/>
 </qualifiedTypeNameHistroy>

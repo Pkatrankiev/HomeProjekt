@@ -1,7 +1,7 @@
-1	^	Movie1.jpg	^	Barbie в рокендрол принцеса	^	Barbie in Rock'n'Royals	^	83	^	Комедия | Анимация	^	дублиран	^	USA 2015
-2	^	Movie2.jpg	^	Миньоните	^	The Minions	^	92	^	Комедия | Анимация	^	дублиран	^	USA 2015
-3	^	Movie3.jpg	^	Отвътре навън	^	Inside Out	^	102	^	Комедия | Анимация	^	дублиран	^	USA 2015
-4	^	Movie4.jpg	^	Транспортер: Ново начало	^	Transporter: Refueled	^	95	^	Екшън	^	английски-САЩ	^	FRANCE 2015
-5	^	Movie5.jpg	^	Ваканция	^	Vacation	^	109	^	Комедия	^	английски-САЩ	^	USA 2015
-6	^	Movie6.jpg	^	Хитмен: Агент 47	^	Hitman: Agent 47	^	97	^	Екшън	^	английски-САЩ	^	USA 2015
-7	^	Movie7.jpg	^	Светът е наш	^	We are your friends	^	96	^	Романтичен | Драма	^	английски-САЩ	^	USA 2015
+1	^	Movie1.jpg	^	Barbie в рокендрол принцеса	^	Barbie in Rock'n'Royals	^	83	^	Комедия | Анимация	^	дублиран	^	USA 2015	^
+2	^	Movie2.jpg	^	Миньоните	^	The Minions	^	92	^	Комедия | Анимация	^	дублиран	^	USA 2015	^
+3	^	Movie3.jpg	^	Отвътре навън	^	Inside Out	^	102	^	Комедия | Анимация	^	дублиран	^	USA 2015	^
+4	^	Movie4.jpg	^	Транспортер: Ново начало	^	Transporter: Refueled	^	95	^	Екшън	^	английски-САЩ	^	FRANCE 2015	^
+5	^	Movie5.jpg	^	Ваканция	^	Vacation	^	109	^	Комедия	^	английски-САЩ	^	USA 2015	^
+6	^	Movie6.jpg	^	Хитмен: Агент 47	^	Hitman: Agent 47	^	97	^	Екшън	^	английски-САЩ	^	USA 2015	^
+7	^	Movie7.jpg	^	Светът е наш	^	We are your friends	^	96	^	Романтичен | Драма	^	английски-САЩ	^	USA 2015	^
