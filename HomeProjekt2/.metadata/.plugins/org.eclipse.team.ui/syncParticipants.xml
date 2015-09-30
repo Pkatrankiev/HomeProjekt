@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syncparticipants>
+<participant displayName="Git (ReservingCine...Tickets/src/ui)" id="org.eclipse.egit.ui.modelCompareParticipant" secondary_id="1442859120749">
+<data forceFetch="false" root="false">
+<org.eclipse.team.ui.MODEL_PARTICIPANT_SETTINGS org.eclipse.team.ui.MODEL_PARTICIPANT_DESCRIPTION="ReservingCine...Tickets/src/ui" startupAction="none">
+<org.eclipse.team.ui.MODEL_PARTICIPANT_REFRESH_SCHEDULE org.eclipse.team.ui.CTX_REFRESHSCHEDULE_ENABLED="false" org.eclipse.team.ui.CTX_REFRESHSCHEDULE_INTERVAL="3600" org.eclipse.team.ui.CTX_REFRESHSCHEDULE_RUNONCE="false"/>
+<org.eclipse.team.ui.MODEL_PARTICIPANT_MAPPINGS modelProviderId="org.eclipse.core.resources.modelProvider">
+<mappings>
+<resources resourcePath="/ReservingCinemaTickets/src/ui" resourceType="2"/>
+</mappings>
+</org.eclipse.team.ui.MODEL_PARTICIPANT_MAPPINGS>
+</org.eclipse.team.ui.MODEL_PARTICIPANT_SETTINGS>
+<gitSynchronizeData container="C:/Documents and Settings/ibm/Desktop/99999/HomeProjekt2/ReservingCinemaTickets" dstRev="fc07b839bc9e89967051d6561af3e033e8c125e7" inludeLocal="true" srcRev="HEAD">
+<includedPaths>
+<path path="C:/Documents and Settings/ibm/Desktop/99999/HomeProjekt2/ReservingCinemaTickets/src/ui"/>
+</includedPaths>
+</gitSynchronizeData>
+</data>
+</participant>
+</syncparticipants>

@@ -1,0 +1,308 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.MenuItem;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.border.EmptyBorder;
+
+import logic.ButtonListener;
+import logic.ButtonProgramListener;
+import logic.ButtonProjectionListener;
+import db.CinemaTheater;
+import db.Movie;
+
+public class ProgramScreen extends JFrame {
+
+	private JPanel contentPane;
+
+	public ProgramScreen(String date, String theaterName) {
+
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		ButtonTheaterList();
+		ButtonDateList();
+		
+		
+		
+		LabelDate(date);
+		
+
+		JLabel lblNewLabel_1 = new JLabel("DounLine");
+		lblNewLabel_1.setIcon(new ImageIcon("line2.png"));
+		lblNewLabel_1.setBounds(0, 536, 892, 30);
+		contentPane.add(lblNewLabel_1);
+
+		JLabel lblBackground = new JLabel("");
+		lblBackground.setIcon(new ImageIcon("cinema-background.jpg"));
+		lblBackground.setBounds(0, 0, 900, 600);
+		getContentPane().add(lblBackground);
+
+	}
+
+	private void LabelDate(String Date) {
+		
+		
+		
+		JLabel lblNewLabel = new JLabel(Date);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(50, 55, 100, 25);
+		contentPane.add(lblNewLabel);
+		
+	}
+	
+private void LabelTheater(String theaterName) {
+		
+		
+		
+		JLabel lblNewLabel = new JLabel(theaterName);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(700, 55, 100, 25);
+		contentPane.add(lblNewLabel);
+		
+	}
+
+	private void ButtonDateList() {
+
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+			SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+			SimpleDateFormat sdtf = new SimpleDateFormat("dd.MM-HH:mm");
+
+			Date dayNau = new Date();
+			String str = sdtf.format(dayNau);
+			try {
+				dayNau = sdtf.parse(str);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+
+			JButton btnProgram = new JButton("ДАТА");
+			final JPopupMenu menu = new JPopupMenu("Menu");
+
+			int count = CreatDateList(stf, dayNau, menu);
+
+			System.out.println("count list " + count);
+			if (count > 0) {
+
+				btnProgram.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						System.out.println(" uu    ooo ");
+						menu.show(btnProgram, btnProgram.getWidth() / 2,
+								btnProgram.getHeight() / 2);
+					}
+				});
+
+				btnProgram.addMouseListener(new MouseAdapter() {
+					// @Override
+					// public void mouseEntered(MouseEvent e) {
+					// btnTimeList.setBackground(Color.GRAY);
+					// }
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						btnProgram.setBackground(Color.WHITE);
+					}
+				});
+				btnProgram.setBackground(Color.WHITE);
+				btnProgram.setToolTipText("Кликни за да избереш");
+
+			} else {
+				btnProgram.setBackground(Color.GRAY);
+			}
+			btnProgram.setFont(new Font("Times New Roman", Font.BOLD, 20));
+			btnProgram.setBounds(10, 20, 150, 30);
+			contentPane.add(btnProgram);
+		}
+
+	}
+
+	private int CreatDateList(SimpleDateFormat stf, Date dayNau,
+			final JPopupMenu menu) {
+		int count = 0;
+		Date date;
+		Date DateAndTime;
+		Date[] dateList = new Date[CinemaTheater.getListCinemaTheater().size()];
+		int countDateList = 0;
+		SimpleDateFormat sdtf = new SimpleDateFormat("dd.MM-HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+		boolean fl = true;
+		for (int j = 0; j < CinemaTheater.getListCinemaTheater().size(); j++) {
+
+			DateAndTime = CinemaTheater.getListCinemaTheater().get(j).getDate();
+
+			if (DateAndTime.after(dayNau)) {
+				System.out.println("data " + sdtf.format(DateAndTime)
+						+ " -> dnes " + sdtf.format(dayNau));
+				fl = true;
+				System.out.println("count  " + countDateList);
+				for (int i = 0; i < countDateList; i++) {
+					System.out.println(countDateList + "  data "
+							+ sdtf.format(DateAndTime) + " -> dateList "
+							+ sdtf.format(dateList[i]));
+
+					if (sdf.format(DateAndTime).equals(sdf.format(dateList[i]))) {
+
+						fl = false;
+						break;
+					}
+				}
+				if (fl) {
+					dateList[countDateList] = DateAndTime;
+					countDateList++;
+
+					date = CinemaTheater.getListCinemaTheater().get(j)
+							.getDate();
+					CinemaTheater TheaterProjection = CinemaTheater
+							.getListCinemaTheater().get(j);
+					JMenuItem mntmNewMenuItem = DateListItem(sdf, date,
+							TheaterProjection);
+
+					menu.add(mntmNewMenuItem);
+					count++;
+
+				}
+			}
+
+		}
+		return count;
+	}
+
+	private JMenuItem DateListItem(SimpleDateFormat sdf, Date date,
+			CinemaTheater theaterProjection) {
+
+		JMenuItem mntmNewMenuItem = new JMenuItem(sdf.format(date));
+
+		mntmNewMenuItem.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("data " +sdf.format(date));
+				LabelDate(sdf.format(date));
+				
+			}
+			
+		});
+
+		return mntmNewMenuItem;
+	}
+
+	private void ButtonTheaterList() {
+
+		{
+			JButton btnTheater = new JButton("КИНО САЛОН");
+			final JPopupMenu menu = new JPopupMenu("Menu");
+
+			int count = CreatTheaterList(menu);
+
+			System.out.println("count list " + count);
+			if (count > 0) {
+
+				btnTheater.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						System.out.println(" uu    ooo ");
+						menu.show(btnTheater, btnTheater.getWidth() / 2,
+								btnTheater.getHeight() / 2);
+					}
+				});
+
+				btnTheater.addMouseListener(new MouseAdapter() {
+					// @Override
+					// public void mouseEntered(MouseEvent e) {
+					// btnTimeList.setBackground(Color.GRAY);
+					// }
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						btnTheater.setBackground(Color.WHITE);
+					}
+				});
+				btnTheater.setBackground(Color.WHITE);
+				btnTheater.setToolTipText("Кликни за да избереш");
+
+			} else {
+				btnTheater.setBackground(Color.GRAY);
+			}
+			btnTheater.setFont(new Font("Times New Roman", Font.BOLD, 17));
+
+			btnTheater.setBounds(680, 20, 180, 30);
+			contentPane.add(btnTheater);
+		}
+
+	}
+
+	private int CreatTheaterList(final JPopupMenu menu) {
+		int count = 0;
+
+		String Theater;
+		String[] theaterList = new String[CinemaTheater.getListCinemaTheater()
+				.size()];
+		int countTheaterList = 0;
+
+		boolean fl = true;
+		for (int j = 0; j < CinemaTheater.getListCinemaTheater().size(); j++) {
+
+			Theater = CinemaTheater.getListCinemaTheater().get(j).getName();
+
+			fl = true;
+			System.out.println("count  " + countTheaterList);
+			for (int i = 0; i < countTheaterList; i++) {
+				System.out.println(countTheaterList + "  data " + Theater
+						+ " -> dateList " + theaterList[i]);
+
+				if (Theater.equals(theaterList[i])) {
+
+					fl = false;
+					break;
+				}
+			}
+			if (fl) {
+				theaterList[countTheaterList] = Theater;
+				countTheaterList++;
+
+				CinemaTheater TheaterProjection = CinemaTheater
+						.getListCinemaTheater().get(j);
+				JMenuItem mntmNewMenuItem = TheaterListItem(TheaterProjection);
+
+				menu.add(mntmNewMenuItem);
+				count++;
+
+			}
+
+		}
+		return count;
+	}
+
+	private JMenuItem TheaterListItem(CinemaTheater theaterProjection) {
+
+		JMenuItem mntmNewMenuItem = new JMenuItem(theaterProjection.getName());
+
+		mntmNewMenuItem.addActionListener(new ButtonProjectionListener(
+				theaterProjection));
+
+		return mntmNewMenuItem;
+	}
+
+}

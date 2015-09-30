@@ -2425,3 +2425,20 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.egit.core 4 0 2015-10-01 01:47:00.428
+!MESSAGE An exception occurred during push on URI https://github.com/Pkatrankiev/HomeProjekt.git: An internal Exception occurred during push: Source ref HEAD1 doesnt resolve to any object.
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of push command
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:178)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:228)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:167)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:229)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.IOException: Source ref HEAD1 doesnt resolve to any object.
+	at org.eclipse.jgit.transport.RemoteRefUpdate.<init>(RemoteRefUpdate.java:288)
+	at org.eclipse.jgit.transport.RemoteRefUpdate.<init>(RemoteRefUpdate.java:192)
+	at org.eclipse.jgit.transport.Transport.findRemoteRefUpdatesFor(Transport.java:641)
+	at org.eclipse.jgit.transport.Transport.findRemoteRefUpdatesFor(Transport.java:1242)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:152)
+	... 4 more

@@ -1,0 +1,7 @@
+1442611567287	Rename local variable 'lblOrigNameMovie'
+1442611758141	Rename local variable 'lblOrigNameMovie'
+1442611843103	Rename local variable 'lblOrigName'
+1442612360828	Rename local variable 'lblGenre'
+1442612717861	Rename local variable 'lblGenreMovie'
+1442612916477	Rename local variable 'lblLangMovie'
+1442615388191	Extract method 'TextLabels'
