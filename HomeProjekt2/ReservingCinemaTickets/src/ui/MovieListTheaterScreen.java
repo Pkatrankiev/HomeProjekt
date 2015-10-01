@@ -34,7 +34,6 @@ public class MovieListTheaterScreen extends JFrame {
 	public MovieListTheaterScreen(
 			ArrayList<CinemaTheater> TheaterForCurenMovieList, Movie curentMovie) {
 		setBackground(Color.WHITE);
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
@@ -92,7 +91,7 @@ public class MovieListTheaterScreen extends JFrame {
 		JLabel lblOrigName = new JLabel("Оригинално заглавие");
 		lblOrigName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblOrigName.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblOrigName.setForeground(Color.BLACK);
+		lblOrigName.setForeground(Color.ORANGE);
 		lblOrigName.setBounds(140, 40, 200, 30);
 		contentPane.add(lblOrigName);
 
@@ -106,7 +105,7 @@ public class MovieListTheaterScreen extends JFrame {
 		JLabel lblGenre = new JLabel("Жанр");
 		lblGenre.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblGenre.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblGenre.setForeground(Color.BLACK);
+		lblGenre.setForeground(Color.ORANGE);
 		lblGenre.setBounds(140, 60, 200, 30);
 		contentPane.add(lblGenre);
 
@@ -120,7 +119,7 @@ public class MovieListTheaterScreen extends JFrame {
 		JLabel lblTimee = new JLabel("Времетраене");
 		lblTimee.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTimee.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblTimee.setForeground(Color.BLACK);
+		lblTimee.setForeground(Color.ORANGE);
 		lblTimee.setBounds(140, 80, 200, 30);
 		contentPane.add(lblTimee);
 
@@ -135,7 +134,7 @@ public class MovieListTheaterScreen extends JFrame {
 		JLabel lblLang = new JLabel("Език");
 		lblLang.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblLang.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblLang.setForeground(Color.BLACK);
+		lblLang.setForeground(Color.ORANGE);
 		lblLang.setBounds(140, 100, 200, 30);
 		contentPane.add(lblLang);
 
@@ -149,7 +148,7 @@ public class MovieListTheaterScreen extends JFrame {
 		JLabel lblCountry = new JLabel("Държава/Година");
 		lblCountry.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCountry.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblCountry.setForeground(Color.BLACK);
+		lblCountry.setForeground(Color.ORANGE);
 		lblCountry.setBounds(140, 120, 200, 30);
 		contentPane.add(lblCountry);
 
