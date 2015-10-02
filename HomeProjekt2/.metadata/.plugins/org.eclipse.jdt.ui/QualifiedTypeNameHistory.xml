@@ -11,4 +11,6 @@
 <fullyQualifiedTypeName name="java.awt.Toolkit"/>
 <fullyQualifiedTypeName name="ui.ProgramScreen"/>
 <fullyQualifiedTypeName name="db.Movie"/>
+<fullyQualifiedTypeName name="java.io.PrintStream"/>
+<fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
 </qualifiedTypeNameHistroy>
