@@ -10,6 +10,7 @@ public class Aplication {
 		
 		ReadFile.readCinemaTheaterFile();
 		ReadFile.readMovieFile();
+		ReadFile.ReadCustomerFile();
 		
 		MoviesScreen frame = new MoviesScreen();
 		frame.setVisible(true);

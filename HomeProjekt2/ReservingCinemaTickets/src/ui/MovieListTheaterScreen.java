@@ -75,6 +75,7 @@ public class MovieListTheaterScreen extends JFrame {
 	}
 
 	private void TextLabels(Movie curentMovie) {
+		
 		String movieLink = curentMovie.getLinkPosterMovie();
 		JLabel lblMovie = new JLabel();
 		lblMovie.setIcon(new ImageIcon(movieLink.replace(".", "-2.")));

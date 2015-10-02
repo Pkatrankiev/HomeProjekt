@@ -69,7 +69,7 @@ public class CinemaTheater {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+	
 
 	public int[][] getSeat() {
 		return seat;

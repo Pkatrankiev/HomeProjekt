@@ -1,0 +1,117 @@
+package db;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class WriteFile {
+	
+	public static void WriteCinemaTheaterFile(JButton[][] btnSeat, CinemaTheater theaterProjection){
+		int index = 0;
+		for (int i = 0; i < CinemaTheater.getListCinemaTheater().size(); i++) {
+			
+			if (CinemaTheater.getListCinemaTheater().get(i).equals(theaterProjection)){
+				System.out.println("sssssssss   sssssssssssssss   "+i);
+				index = i;
+				if(CinemaTheater.getListCinemaTheater().get(i).getName().equals(theaterProjection.getName())){
+					System.out.println("Name OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie()==theaterProjection.getIndeksMovie()){
+					System.out.println("Index OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getAdres().equals(theaterProjection.getAdres())){
+					System.out.println("Adress OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getDate().equals(theaterProjection.getDate())){
+					System.out.println("Date OK");
+				};
+				if (CinemaTheater.getListCinemaTheater().get(i).getTime().equals(theaterProjection.getTime())){
+					System.out.println("Time OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getPrice()==theaterProjection.getPrice()){
+					System.out.println("Price OK");
+				};
+				int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
+//				System.out.println(ll);
+				int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
+//				System.out.println(cc);
+				int sum = 0;
+				int sumP = 0;
+				for (int j = 0; j < ll; j++) {
+					for (int j2 = 0; j2 < cc; j2++) {
+					sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];
+					sumP = sumP + theaterProjection.getSeat()[j][j2];
+					
+					}
+					}
+				if(sum==sumP){
+					System.out.println("Sum OK");
+				};
+					}
+				
+			}
+			
+		int colums = theaterProjection.getColumns();
+		int lines = theaterProjection.getLines();
+		int [][]mind = new int[colums][colums];
+		
+		for (int i = 0; i < lines; i++) {
+			for (int j = 0; j < colums; j++) {
+				if (btnSeat[i][j].getText().equals("0")){
+				
+				mind[i][j]=1;
+				
+				
+				}else mind[i][j]=-1;
+			}
+			}
+		CinemaTheater.getListCinemaTheater().get(index).setSeat(mind);
+
+		System.out.println("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]");
+		int i=index;
+			
+			
+				if(CinemaTheater.getListCinemaTheater().get(i).getName().equals(theaterProjection.getName())){
+					System.out.println("Name OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie()==theaterProjection.getIndeksMovie()){
+					System.out.println("Index OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getAdres().equals(theaterProjection.getAdres())){
+					System.out.println("Adress OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getDate().equals(theaterProjection.getDate())){
+					System.out.println("Date OK");
+				};
+				if (CinemaTheater.getListCinemaTheater().get(i).getTime().equals(theaterProjection.getTime())){
+					System.out.println("Time OK");
+				};
+				if(CinemaTheater.getListCinemaTheater().get(i).getPrice()==theaterProjection.getPrice()){
+					System.out.println("Price OK");
+				};
+				int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
+//				System.out.println(ll);
+				int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
+//				System.out.println(cc);
+				int sum = 0;
+				int sumP = 0;
+				for (int j = 0; j < ll; j++) {
+					for (int j2 = 0; j2 < cc; j2++) {
+					sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];
+					sumP = sumP + theaterProjection.getSeat()[j][j2];
+					
+					}
+					}
+				if(sum==sumP){
+					System.out.println("Sum OK");
+				};
+					}
+				
+			
+		
+		
+	}
+
+}

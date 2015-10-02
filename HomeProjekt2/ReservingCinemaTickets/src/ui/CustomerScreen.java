@@ -1,0 +1,223 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+import db.CinemaTheater;
+import db.Movie;
+
+public class CustomerScreen extends JFrame {
+	
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField1;
+	
+	public CustomerScreen(JButton[][] btnSeat, CinemaTheater theaterProjection){
+		
+		setBackground(Color.WHITE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		TextLabels(theaterProjection);
+				
+		int x = 10;
+		int y = 100;
+		int countTicket = 1;
+		String str=null;
+		float price = theaterProjection.getPrice() ;
+		int colums = theaterProjection.getColumns();
+		int lines = theaterProjection.getLines();
+		
+		for (int i = 0; i < lines; i++) {
+			for (int j = 0; j < colums; j++) {
+				if (btnSeat[i][j].getText().equals("0")){
+				str = countTicket+" . Ред "+(i +1)+" Място "+(j +1)+" Цена "+
+				String.format("%.2f",price)+"лв.";
+				
+				JLabel lblSeat = new JLabel(str);
+				lblSeat.setFont(new Font("Times New Roman", Font.BOLD, 20));
+				lblSeat.setForeground(Color.WHITE);
+				lblSeat.setBounds(10, y, 620, 25);
+				contentPane.add(lblSeat);
+				y=y+25;
+				countTicket++;
+				
+				}
+			}
+			}
+		
+		str = "Обща стойност:"+String.format("%.2f",(--countTicket*price))+"лв.";
+			JLabel lblSeat = new JLabel(str);
+			lblSeat.setFont(new Font("Times New Roman", Font.BOLD, 22));
+			lblSeat.setForeground(Color.RED);
+			lblSeat.setBounds(80, y+5, 620, 25);
+			contentPane.add(lblSeat);
+	
+			JButton btnPurchase = new JButton("ПОТВЪРДИ");
+			btnPurchase.setFont(new Font("Times New Roman", Font.BOLD, 20));
+			btnPurchase.setToolTipText("Кликни за финализиране");
+			btnPurchase.setBounds(720, 470, 150, 30);
+			contentPane.add(btnPurchase);
+			
+			JTextPane textPaneAdress = new JTextPane();
+			textPaneAdress.setBorder(UIManager.getBorder("PasswordField.border"));
+			textPaneAdress.setForeground(Color.BLACK);
+			textPaneAdress.setBackground(Color.WHITE);
+			textPaneAdress.setBounds(500, 195, 170, 50);
+			contentPane.add(textPaneAdress);
+			
+			
+			btnPurchase.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					String Family = null;
+					String Name = null;
+					String Adress = null;
+				
+					 Family = textField1.getText();
+					System.out.println("+++++++++++++++++++++FFFFFF "+Family);
+					Family = Family.trim();
+					Name = textField.getText();
+					System.out.println("+++++++++++++++++++++NNNNNNNNNN "+Name);
+					Name = Name.trim();
+					Adress = textPaneAdress.getText();
+					System.out.println("+++++++++++++++++++++AAA"+Adress);
+					Adress = Adress.trim();
+					
+				
+								
+					
+					if (!Name.equals("") && !Family.equals("") && !Adress.equals("")
+							&&(Adress.length()>3)&&(Name.length()>3)&&(Family.length()>3)){
+						
+						System.out.println("+++++++++++++++++++++"+Name+" "+Adress+" "+Family);
+						new FinalCustomerScreen(btnSeat, theaterProjection,Name, Family, Adress).setVisible(true);
+					}else{
+						new InfoScreen("Има празни полета или \nтвърде къси имена").setVisible(true); 
+					}
+					
+				}
+			});
+			
+			
+
+			
+		JLabel lblNewLabel_1 = new JLabel("DounLine");
+		lblNewLabel_1.setIcon(new ImageIcon("line4.png"));
+		lblNewLabel_1.setBounds(0, 536, 892, 30);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblBackground = new JLabel("");
+		lblBackground.setIcon(new ImageIcon("cinema-background.jpg"));
+		lblBackground.setBounds(0, 0, 900, 600);
+		getContentPane().add(lblBackground);
+		
+	}
+
+	
+	private void TextLabels(CinemaTheater theaterProjection) {
+		
+		
+		
+		JLabel lblNewLabel = new JLabel("Вашата заявка");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(10, 10, 488, 25);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblCustomer = new JLabel("Вашите данни");
+		lblCustomer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCustomer.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblCustomer.setForeground(Color.WHITE);
+		lblCustomer.setBounds(500, 10, 390, 25);
+		contentPane.add(lblCustomer);
+		
+		JLabel lblInfoTitle = DefaultComponentFactory.getInstance().createTitle("Всички полета са задължителни");
+		lblInfoTitle.setForeground(Color.ORANGE);
+		lblInfoTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblInfoTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblInfoTitle.setBounds(500, 40, 350, 20);
+		contentPane.add(lblInfoTitle);
+		
+		JLabel lblNameTitle = DefaultComponentFactory.getInstance().createTitle("Име");
+		lblNameTitle.setForeground(Color.WHITE);
+		lblNameTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNameTitle.setBounds(500, 70, 150, 20);
+		contentPane.add(lblNameTitle);
+		
+		textField = new JTextField();
+		textField.setBounds(500, 95, 170, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+	
+		
+		JLabel lblFamilyTitle = DefaultComponentFactory.getInstance().createTitle("Фамилия");
+		lblFamilyTitle.setForeground(Color.WHITE);
+		lblFamilyTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblFamilyTitle.setBounds(500, 120, 150, 20);
+		contentPane.add(lblFamilyTitle);
+		
+		textField1 = new JTextField();
+		textField1.setBounds(500, 145, 170, 20);
+		getContentPane().add(textField1);
+		textField1.setColumns(10);
+		
+		
+		JLabel lblAdressTitle = DefaultComponentFactory.getInstance().createTitle("Адрес за получаване");
+		lblAdressTitle.setForeground(Color.WHITE);
+		lblAdressTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAdressTitle.setBounds(500, 170, 250, 20);
+		contentPane.add(lblAdressTitle);
+		
+		
+		
+		int indexMovie = theaterProjection.getIndeksMovie();
+		indexMovie--;
+		Movie curentMovie = Movie.getListMovie().get(indexMovie);
+		String movieBgName = curentMovie.getBgName();
+		JLabel lblNameMovie = new JLabel(movieBgName);
+		lblNameMovie.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lblNameMovie.setForeground(Color.WHITE);
+		lblNameMovie.setBounds(10, 40, 620, 30);
+		contentPane.add(lblNameMovie);
+		
+				
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+		String dateProjection = sdf.format( theaterProjection.getDate());
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		String timeProjection = stf.format( theaterProjection.getTime());
+		
+		JLabel lbldateProjection = new JLabel("ДАТА "+dateProjection+" / ЧАС "+timeProjection);
+		lbldateProjection.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lbldateProjection.setForeground(Color.ORANGE);
+		lbldateProjection.setBounds(10, 70, 500, 25);
+		contentPane.add(lbldateProjection);
+		
+		
+		
+	}
+
+
+
+	
+}

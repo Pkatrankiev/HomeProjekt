@@ -53,11 +53,11 @@ public class ReadFile {
 							if (flDate) {
 								String str = text.toString();
 								str = str.trim();
-								System.out.println(" str123 "+str);
+//								System.out.println(" str123 "+str);
 								dateMovie = sdf.parse(str);
 								CinemaTheater.getListdateWeek().add(dateMovie);
 								countDate++;
-								System.out.println(" date123 "+sdf.format(dateMovie));
+//								System.out.println(" date123 "+sdf.format(dateMovie));
 								if (countDate == 7) {
 									flDate = false;
 									
@@ -114,6 +114,7 @@ public class ReadFile {
 										String str = text.toString();
 										str = str.trim();
 										CinemaColums = Integer.parseInt(str);
+										
 									}
 										break;
 									default:
@@ -172,25 +173,7 @@ public class ReadFile {
 		} else {
 			System.out.println("No such file");
 		}
-//		for (int i = 0; i < CinemaTheater.getListCinemaTheater().size(); i++) {
-//
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getName());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getAdres());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getDate());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getTime());
-//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getPrice());
-//			int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
-//			System.out.println(ll);
-//			int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
-//			System.out.println(cc);
-//			int sum = 0;
-//			for (int j = 0; j < ll; j++) {
-//				for (int j2 = 0; j2 < cc; j2++) {
-//				sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];	
-//				}
-//				}System.out.println(sum);
-//				}
+
 	}
 
 	public static void readMovieFile() {
@@ -303,4 +286,143 @@ public class ReadFile {
 		
 	}
 
+	public static void ReadCustomerFile() {
+
+		int cont = -1;
+
+		String Name = null;
+		String Family = null;
+		String Adress = null;
+		String NameTheater = null;
+		String AdressTheater = null;
+		String NameMovie = null;
+		String Date = null;
+		String Time = null;
+		String Price = null;
+		int NumberTickets = 0;
+		boolean flTickets=false;
+		String[]Thiket = new String [NumberTickets];
+
+		File f = new File("Customer.txt");
+		if (f != null) {
+			Scanner sc = null;
+			try {
+
+				sc = new Scanner(f);
+				while (sc.hasNextLine()) {
+					String textLine = sc.nextLine();
+					StringBuilder text = new StringBuilder();
+					cont = 1;
+					int y=0;
+					for (int i = 0; i < textLine.length(); i++) {
+						if ('^' != textLine.charAt(i)) {
+							text.append(textLine.charAt(i));
+						} else {
+							if (cont < 11) {
+								System.out.println( cont +" "+text.toString());
+							switch (cont) {
+							case 1: {
+								Name = text.toString();
+								Name = Name.trim();
+								
+							}
+								break;
+							case 2: {
+								Family = text.toString();
+								Family = Family.trim();
+
+							}
+								break;
+							case 3: {
+
+								Adress = text.toString();
+								Adress = Adress.trim();
+
+							}
+								break;
+							case 4: {
+								NameTheater = text.toString();
+								NameTheater = NameTheater.trim();
+
+							}
+								break;
+							case 5: {
+								AdressTheater = text.toString();
+								AdressTheater = AdressTheater.trim();
+								
+							}
+								break;
+							case 6: {
+								NameMovie = text.toString();
+								NameMovie = NameMovie.trim();
+
+							}
+								break;
+							case 7: {
+								Date = text.toString();
+								Date = Date.trim();
+
+							}
+								break;
+							case 8: {
+								Time = text.toString();
+								Time = Time.trim();
+								
+							}break;
+							case 9: {
+								Price = text.toString();
+								Price = Price.trim();
+								
+							}break;
+							case 10: {
+								String str = text.toString();
+								str = str.trim();
+								NumberTickets = Integer.parseInt(str);
+								flTickets=true;
+								
+							}
+								break;
+							default:
+								break;
+							}
+							}else{
+								if (flTickets){
+								flTickets=false;
+								}else{
+									Thiket = new String [NumberTickets];
+									Thiket[y] = text.toString();
+									Thiket[y] = Thiket[y].trim();
+								
+								y++;
+								}
+							}
+
+							cont++;
+							text.delete(0, text.length());
+
+						}
+					}
+					Customer curentCustomer = new Customer( Name,  Family, Adress,
+							NameTheater, AdressTheater, NameMovie, Date, Time,  Price,NumberTickets,
+							 Thiket);
+
+					Customer.getListCustomer().add(curentCustomer);
+
+				}
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+
+			} finally {
+
+				sc.close();
+			}
+
+		} else {
+			System.out.println("No such file");
+		}
+		
+	}
+	
+	
 }

@@ -1,0 +1,204 @@
+package db;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class WriteFile {
+
+	public static void WriteCinemaTheaterFile(JButton[][] btnSeat,
+
+	CinemaTheater theaterProjection) {
+
+		CreatSeatMasive(btnSeat, theaterProjection);
+
+		String[] textLines = CreatTextMasive();
+
+		saveContaktsInFile(textLines);
+
+	}
+
+	private static String CreatFirstLine() {
+		StringBuilder textAll = new StringBuilder();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+
+		for (int i = 0; i < 7; i++) {
+
+			textAll.append(sdf.format(CinemaTheater.getListdateWeek().get(i))
+					+ " ^ ");
+		}
+		String firstLine = textAll.toString();
+		return firstLine;
+	}
+
+	private static void CreatSeatMasive(JButton[][] btnSeat,
+			CinemaTheater theaterProjection) {
+		
+
+		for (int i = 0; i < CinemaTheater.getListCinemaTheater().size(); i++) {
+
+			if (CinemaTheater.getListCinemaTheater().get(i)
+					.equals(theaterProjection)) {
+			
+				int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
+				int cc = CinemaTheater.getListCinemaTheater().get(i)
+						.getColumns();
+
+				int[][] mind = new int[ll][cc];
+
+				for (int j = 0; j < ll; j++) {
+					for (int k = 0; k < cc; k++) {
+
+						if (btnSeat[j][k].getText().equals("0")) {
+
+							mind[j][k] = 1;
+
+						} else
+							mind[j][k] = -1;
+					}
+				}
+				CinemaTheater.getListCinemaTheater().get(i).setSeat(mind);
+				break;
+			}
+
+		}
+	}
+
+	private static String[] CreatTextMasive() {
+		StringBuilder textAll = new StringBuilder();
+		// textAll = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		int countCinemaTheatetr = CinemaTheater.getListCinemaTheater().size();
+		String[] textLines = new String[countCinemaTheatetr];
+
+		for (int i = 0; i < countCinemaTheatetr; i++) {
+
+			System.out.println(String.valueOf(CinemaTheater
+					.getListCinemaTheater().get(i).getIndeksMovie())
+					+ " ^ ");
+			System.out.println(CinemaTheater.getListCinemaTheater().get(i)
+					.getName()
+					+ " ^ ");
+			System.out.println(CinemaTheater.getListCinemaTheater().get(i)
+					.getAdres()
+					+ " ^ ");
+			System.out.println(sdf.format(CinemaTheater.getListCinemaTheater()
+					.get(i).getDate())
+					+ " ^ ");
+			System.out.println(stf.format(CinemaTheater.getListCinemaTheater()
+					.get(i).getTime())
+					+ " ^ ");
+			System.out.println(String.valueOf(CinemaTheater
+					.getListCinemaTheater().get(i).getPrice())
+					+ " ^ ");
+			System.out.println(String.valueOf(CinemaTheater
+					.getListCinemaTheater().get(i).getLines())
+					+ " ^ ");
+			System.out.println(String.valueOf(CinemaTheater
+					.getListCinemaTheater().get(i).getColumns())
+					+ " ^ ");
+			System.out.println();
+			textAll.append(String.valueOf(CinemaTheater.getListCinemaTheater()
+					.get(i).getIndeksMovie())
+					+ " ^ ");
+			textAll.append(CinemaTheater.getListCinemaTheater().get(i)
+					.getName()
+					+ " ^ ");
+			textAll.append(CinemaTheater.getListCinemaTheater().get(i)
+					.getAdres()
+					+ " ^ ");
+			textAll.append(sdf.format(CinemaTheater.getListCinemaTheater()
+					.get(i).getDate())
+					+ " ^ ");
+			textAll.append(stf.format(CinemaTheater.getListCinemaTheater()
+					.get(i).getTime())
+					+ " ^ ");
+			textAll.append(String.valueOf(CinemaTheater.getListCinemaTheater()
+					.get(i).getPrice())
+					+ " ^ ");
+			int lines = CinemaTheater.getListCinemaTheater().get(i).getLines();
+			textAll.append(String.valueOf(lines)+ " ^ ");
+			int ccolums = CinemaTheater.getListCinemaTheater().get(i).getColumns();
+			textAll.append(String.valueOf(ccolums)+ " ^ ");
+
+			
+			for (int j = 0; j < lines; j++) {
+				for (int k = 0; k < ccolums; k++) {
+
+					textAll.append(String.valueOf(CinemaTheater
+							.getListCinemaTheater().get(i).getSeat()[j][k])
+							+ " ^ ");
+				}
+			}
+//			System.out.println(i+" "+textAll.toString());
+			textLines[i] = textAll.toString();
+		}
+		return textLines;
+	}
+
+	static void saveContaktsInFile(String[] textLines) {
+
+		PrintStream fileWriter = null;
+		try {
+			fileWriter = new PrintStream("saloni4.txt");
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
+		fileWriter.println(CreatFirstLine());
+
+		for (int i = 0; i < textLines.length; i++) {
+			fileWriter.println(textLines[i]);
+			fileWriter.println();
+//			System.out.println("sssssssssssssssssss " + i);
+		}
+
+		fileWriter.close();
+	}
+
+}
+
+//
+// if(CinemaTheater.getListCinemaTheater().get(i).getName().equals(theaterProjection.getName())){
+// System.out.println("Name OK");
+// };
+// if(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie()==theaterProjection.getIndeksMovie()){
+// System.out.println("Index OK");
+// };
+// if(CinemaTheater.getListCinemaTheater().get(i).getAdres().equals(theaterProjection.getAdres())){
+// System.out.println("Adress OK");
+// };
+// if(CinemaTheater.getListCinemaTheater().get(i).getDate().equals(theaterProjection.getDate())){
+// System.out.println("Date OK");
+// };
+// if
+// (CinemaTheater.getListCinemaTheater().get(i).getTime().equals(theaterProjection.getTime())){
+// System.out.println("Time OK");
+// };
+// if(CinemaTheater.getListCinemaTheater().get(i).getPrice()==theaterProjection.getPrice()){
+// System.out.println("Price OK");
+// };
+// int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
+// // System.out.println(ll);
+// int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
+// // System.out.println(cc);
+// sum = 0;
+// int sumP = 0;
+// for (int j = 0; j < ll; j++) {
+// for (int j2 = 0; j2 < cc; j2++) {
+// sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];
+// sumP = sumP + theaterProjection.getSeat()[j][j2];
+//
+// }
+// }
+// if(sum==sumP){
+// System.out.println("Sum OK"+sum);
+// };

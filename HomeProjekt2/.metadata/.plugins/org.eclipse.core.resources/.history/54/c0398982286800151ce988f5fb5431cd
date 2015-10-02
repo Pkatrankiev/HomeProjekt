@@ -1,0 +1,264 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import db.CinemaTheater;
+import db.Movie;
+
+public class TheaterProjectionScreen extends JFrame{
+
+	private JPanel contentPane;
+
+	public TheaterProjectionScreen(CinemaTheater theaterProjection) {
+		setBackground(Color.WHITE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		TextLabels(theaterProjection);
+		
+		int x = 285;
+		int y = 150;
+		int colums = theaterProjection.getColumns();
+		int lines = theaterProjection.getLines();
+		JButton[][] btnSeat = new JButton[theaterProjection.getColumns()][theaterProjection.getLines()];
+		
+		for (int i = 0; i < lines; i++) {
+
+			y = y + 22;
+			linesLabel( x, (y - 2), (i+1));
+
+			int xx = 325;
+			for (int j = 0; j < colums; j++) {
+				
+				
+				ButtonSeats(theaterProjection, btnSeat, xx, y, i, j);
+				
+				xx = xx + 27;
+			}
+			
+			linesLabel( xx, (y - 2), (i+1));
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("DounLine");
+		lblNewLabel_1.setIcon(new ImageIcon("line3.png"));
+		lblNewLabel_1.setBounds(0, 536, 892, 30);
+		contentPane.add(lblNewLabel_1);
+	}
+	
+
+	private void linesLabel( int x, int y, int i) {
+		
+		JLabel linesLabel = new JLabel(i+"");
+		linesLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		linesLabel.setForeground(Color.WHITE);
+		linesLabel.setBounds(x, y, 30, 25);
+		contentPane.add(linesLabel);
+	}
+	
+	
+	private void ButtonSeats(CinemaTheater theaterProjection, JButton[][] btnSeat, int x, int y, int i, int j) {
+		
+		
+//		btnSeat[i][j].setText("");
+//		
+//		btnSeat[i][j].getText();
+		
+		
+		if (theaterProjection.getSeat()[i][j] < 0) {
+
+		
+			btnSeat[i][j].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btnSeat[i][j].setBackground(Color.GRAY);
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnSeat[i][j].setBackground(Color.WHITE);
+				}
+			});
+			btnSeat[i][j].setBackground(Color.WHITE);
+			btnSeat[i][j].setToolTipText("Êëèêíè çà äà èçáåðåø");
+
+		} else {
+			btnSeat[i][j].setBackground(Color.GRAY);
+		}
+		btnSeat[i][j].setBounds(x, y, 80, 25);
+		contentPane.add(btnSeat[i][j]);
+
+	}
+
+	private void TextLabels(CinemaTheater theaterProjection) {
+		
+		int indexMovie = theaterProjection.getIndeksMovie();
+		indexMovie--;
+		Movie curentMovie = Movie.getListMovie().get(indexMovie);
+		
+		
+		String movieBgName = curentMovie.getBgName();
+		JLabel lblNameMovie = new JLabel(movieBgName);
+		lblNameMovie.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNameMovie.setForeground(Color.WHITE);
+		lblNameMovie.setBounds(10, 10, 500, 30);
+		contentPane.add(lblNameMovie);
+		
+		String theaterName = theaterProjection.getName();
+		JLabel lblNameTheater = new JLabel(theaterName);
+		lblNameTheater.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNameTheater.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNameTheater.setForeground(Color.WHITE);
+		lblNameTheater.setBounds(550, 10, 320, 30);
+		contentPane.add(lblNameTheater);
+		
+		
+		JLabel moviDateProj = new JLabel("ÄÀÒÀ ÍÀ ÏÐÎÆÅÊÖÈßÒÀ");
+		moviDateProj.setHorizontalAlignment(SwingConstants.CENTER);
+		moviDateProj.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		moviDateProj.setForeground(Color.BLACK);
+		moviDateProj.setBounds(430, 40, 200, 30);
+		contentPane.add(moviDateProj);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+		String dateProjection = sdf.format( theaterProjection.getDate());
+		JLabel lbldateProjection = new JLabel(dateProjection);
+		lbldateProjection.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldateProjection.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lbldateProjection.setForeground(Color.WHITE);
+		lbldateProjection.setBounds(430, 65, 200, 25);
+		contentPane.add(lbldateProjection);
+		
+		JLabel moviTimeProj = new JLabel("ÍÀ×ÀËÅÍ ×ÀÑ");
+		moviTimeProj.setHorizontalAlignment(SwingConstants.CENTER);
+		moviTimeProj.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		moviTimeProj.setForeground(Color.BLACK);
+		moviTimeProj.setBounds(430, 90, 200, 25);
+		contentPane.add(moviTimeProj);
+		
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		String timeProjection = stf.format( theaterProjection.getTime());
+		JLabel lbltimeProjection = new JLabel(timeProjection);
+		lbltimeProjection.setHorizontalAlignment(SwingConstants.CENTER);
+		lbltimeProjection.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lbltimeProjection.setForeground(Color.WHITE);
+		lbltimeProjection.setBounds(430, 110, 200, 25);
+		contentPane.add(lbltimeProjection);
+		
+		
+		String theaterAdress = theaterProjection.getAdres();
+		JLabel lblAdressTheater = new JLabel(theaterAdress);
+		lblAdressTheater.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAdressTheater.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblAdressTheater.setForeground(Color.BLACK);
+		lblAdressTheater.setBounds(550, 40, 320, 30);
+		contentPane.add(lblAdressTheater);
+
+		JLabel lblOrigName = new JLabel("Îðèãèíàëíî çàãëàâèå");
+		lblOrigName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOrigName.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblOrigName.setForeground(Color.BLACK);
+		lblOrigName.setBounds(10, 40, 200, 30);
+		contentPane.add(lblOrigName);
+
+		String movieOrigName = curentMovie.origName;
+		JLabel lblOrigNameMovie = new JLabel(movieOrigName);
+		lblOrigNameMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblOrigNameMovie.setForeground(Color.WHITE);
+		lblOrigNameMovie.setBounds(220, 40, 200, 30);
+		contentPane.add(lblOrigNameMovie);
+
+		JLabel lblGenre = new JLabel("Æàíð");
+		lblGenre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGenre.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblGenre.setForeground(Color.BLACK);
+		lblGenre.setBounds(10, 60, 200, 30);
+		contentPane.add(lblGenre);
+
+		String movieGenre = curentMovie.getGenre();
+		JLabel lblGenreMovie = new JLabel(movieGenre);
+		lblGenreMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblGenreMovie.setForeground(Color.WHITE);
+		lblGenreMovie.setBounds(220, 60, 200, 30);
+		contentPane.add(lblGenreMovie);
+
+		JLabel lblTimee = new JLabel("Âðåìåòðàåíå");
+		lblTimee.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTimee.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblTimee.setForeground(Color.BLACK);
+		lblTimee.setBounds(10, 80, 200, 30);
+		contentPane.add(lblTimee);
+
+		int movieTime = curentMovie.getMovieTime();
+		String strTime = movieTime + "ìèí.";
+		JLabel lblTimeMovie = new JLabel(strTime);
+		lblTimeMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblTimeMovie.setForeground(Color.WHITE);
+		lblTimeMovie.setBounds(220, 80, 200, 30);
+		contentPane.add(lblTimeMovie);
+
+		JLabel lblLang = new JLabel("Åçèê");
+		lblLang.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLang.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblLang.setForeground(Color.BLACK);
+		lblLang.setBounds(10, 100, 200, 30);
+		contentPane.add(lblLang);
+
+		String movieLang = curentMovie.getLanguage();
+		JLabel lblLangMovie = new JLabel(movieLang);
+		lblLangMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblLangMovie.setForeground(Color.WHITE);
+		lblLangMovie.setBounds(220, 100, 200, 30);
+		contentPane.add(lblLangMovie);
+
+		JLabel lblCountry = new JLabel("Äúðæàâà/Ãîäèíà");
+		lblCountry.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCountry.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblCountry.setForeground(Color.BLACK);
+		lblCountry.setBounds(10, 120, 200, 30);
+		contentPane.add(lblCountry);
+
+		String movieCountry = curentMovie.getCountry();
+		JLabel lblCountryMovie = new JLabel(movieCountry);
+		lblCountryMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblCountryMovie.setForeground(Color.WHITE);
+		lblCountryMovie.setBounds(220, 120, 200, 30);
+		contentPane.add(lblCountryMovie);
+	
+	
+	
+	}
+	
+	
+
+
+}

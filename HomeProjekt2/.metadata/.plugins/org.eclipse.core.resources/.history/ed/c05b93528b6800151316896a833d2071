@@ -1,0 +1,15 @@
+package ui;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import db.CinemaTheater;
+
+public class CustomerScreen extends JFrame {
+	
+	public CustomerScreen(JButton[][] btnSeat, CinemaTheater theaterProjection){
+		
+		
+	}
+
+}

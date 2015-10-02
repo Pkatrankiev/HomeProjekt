@@ -1,0 +1,88 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import java.awt.ScrollPane;
+import java.awt.Label;
+import java.awt.Button;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+
+public class ssss extends JFrame {
+	public ssss() {
+		int i=0;
+		int k=0;
+		getContentPane().setLayout(null);
+		
+		Button button = new Button("123456");
+		button.setBounds(38, 74, 38, 15);
+		getContentPane().add(button);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(66, 109, 89, 23);
+		getContentPane().add(btnNewButton);
+		
+		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle(klik(i)+"");
+		lblNewJgoodiesTitle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 klik(i);
+				 k++;
+				
+			}
+		});
+		lblNewJgoodiesTitle.setBounds(10, 173, 227, 29);
+		getContentPane().add(lblNewJgoodiesTitle);
+		
+		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel(i+"");
+		lblNewJgoodiesLabel.setBounds(38, 213, 180, 23);
+		getContentPane().add(lblNewJgoodiesLabel);
+		
+	}
+	public int klik(int kk){
+		System.out.println(kk);
+	      kk++;
+	      return kk;
+}
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ssss frame = new ssss();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+}

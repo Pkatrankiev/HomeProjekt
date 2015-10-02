@@ -1,0 +1,38 @@
+package db;
+
+import javax.swing.JButton;
+
+public class WriteFile {
+	
+	public static void WriteCinemaTheaterFile(JButton[][] btnSeat, CinemaTheater theaterProjection){
+		
+		for (int i = 0; i < CinemaTheater.getListCinemaTheater().size(); i++) {
+			
+			if (CinemaTheater.getListCinemaTheater().get(i).equals(theaterProjection)){
+				System.out.println("sssssssss   sssssssssssssss   "+i);
+			}
+			
+			
+
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getName());
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getIndeksMovie());
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getAdres());
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getDate());
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getTime());
+//			System.out.println(CinemaTheater.getListCinemaTheater().get(i).getPrice());
+//			int ll = CinemaTheater.getListCinemaTheater().get(i).getLines();
+//			System.out.println(ll);
+//			int cc = CinemaTheater.getListCinemaTheater().get(i).getColumns();
+//			System.out.println(cc);
+//			int sum = 0;
+//			for (int j = 0; j < ll; j++) {
+//				for (int j2 = 0; j2 < cc; j2++) {
+//				sum = sum + CinemaTheater.getListCinemaTheater().get(i).getSeat()[j][j2];	
+//				}
+//				}System.out.println(sum);
+				}
+		
+		
+	}
+
+}

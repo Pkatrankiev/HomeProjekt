@@ -1,0 +1,318 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+import db.CinemaTheater;
+import db.Movie;
+
+public class TheaterProjectionScreen extends JFrame{
+
+	private JPanel contentPane;
+
+	public TheaterProjectionScreen(CinemaTheater theaterProjection) {
+		setBackground(Color.WHITE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		TextLabels(theaterProjection);
+		
+		int x = 200;
+		int y = 150;
+		int colums = theaterProjection.getColumns();
+		int lines = theaterProjection.getLines();
+		JButton[][] btnSeat = new JButton[lines][colums];
+		
+		for (int i = 0; i < lines; i++) {
+
+			y = y + 25;
+			linesLabel( x, (y - 2), (i+1));
+
+			int xx = 240;
+			for (int j = 0; j < colums; j++) {
+				
+				
+				ButtonSeats(theaterProjection, btnSeat, xx, y, i, j);
+				
+				xx = xx + 30;
+			}
+			
+			linesLabel((xx+10), (y - 2), (i+1));
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("DounLine");
+		lblNewLabel_1.setIcon(new ImageIcon("line3.png"));
+		lblNewLabel_1.setBounds(0, 536, 892, 30);
+		contentPane.add(lblNewLabel_1);
+	}
+	
+
+	private void linesLabel( int x, int y, int i) {
+		
+		JLabel linesLabel = new JLabel(i+"");
+		linesLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		linesLabel.setForeground(Color.WHITE);
+		linesLabel.setBounds(x, y, 30, 25);
+		contentPane.add(linesLabel);
+	}
+	
+	
+	private void ButtonSeats(CinemaTheater theaterProjection, JButton[][] btnSeat, int x, int y, int i, int j) {
+		
+		JButton btn = new JButton("  ");
+		btnSeat[i][j] = btn;
+		
+		btnSeat[i][j].setText(theaterProjection.getSeat()[i][j]+"");
+		
+		if (btnSeat[i][j].getText().equals("-1")) {
+
+			btnSeat[i][j].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnSeat[i][j].setText("0");
+					
+					CountTicket(btnSeat, theaterProjection);
+					System.out.println("ttttttttttttttt - "+btnSeat[i][j].getText());
+				}
+			});
+		
+			btnSeat[i][j].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					
+					btnSeat[i][j].setBackground(Color.ORANGE);
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					
+					if (btnSeat[i][j].getText().equals("0")){
+						btnSeat[i][j].setBackground(Color.ORANGE);
+						
+						}else{
+							btnSeat[i][j].setBackground(Color.GREEN);
+						}
+				}
+			});
+			
+			System.out.println("ssssssssssss - "+btnSeat[i][j].getText());
+			
+			if (btnSeat[i][j].getText().equals("0")){
+			btnSeat[i][j].setBackground(Color.ORANGE);
+			}else{
+				btnSeat[i][j].setBackground(Color.GREEN);
+			}
+			
+			btnSeat[i][j].setToolTipText("ред "+(i+1)+" място "+(j+1));
+
+		} else {
+			btnSeat[i][j].setBackground(Color.RED);
+		}
+		
+		btnSeat[i][j].setBounds(x, y, 25, 20);
+		contentPane.add(btnSeat[i][j]);
+
+	}
+
+	private void TextLabels(CinemaTheater theaterProjection) {
+		
+		int indexMovie = theaterProjection.getIndeksMovie();
+		indexMovie--;
+		Movie curentMovie = Movie.getListMovie().get(indexMovie);
+		
+		
+		String movieBgName = curentMovie.getBgName();
+		JLabel lblNameMovie = new JLabel(movieBgName);
+		lblNameMovie.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNameMovie.setForeground(Color.WHITE);
+		lblNameMovie.setBounds(10, 10, 500, 30);
+		contentPane.add(lblNameMovie);
+		
+		String theaterName = theaterProjection.getName();
+		JLabel lblNameTheater = new JLabel(theaterName);
+		lblNameTheater.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNameTheater.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNameTheater.setForeground(Color.WHITE);
+		lblNameTheater.setBounds(550, 10, 320, 30);
+		contentPane.add(lblNameTheater);
+		
+		
+		JLabel moviDateProj = new JLabel("ДАТА НА ПРОЖЕКЦИЯТА");
+		moviDateProj.setHorizontalAlignment(SwingConstants.CENTER);
+		moviDateProj.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		moviDateProj.setForeground(Color.BLACK);
+		moviDateProj.setBounds(430, 40, 200, 30);
+		contentPane.add(moviDateProj);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
+		String dateProjection = sdf.format( theaterProjection.getDate());
+		JLabel lbldateProjection = new JLabel(dateProjection);
+		lbldateProjection.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldateProjection.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lbldateProjection.setForeground(Color.WHITE);
+		lbldateProjection.setBounds(430, 65, 200, 25);
+		contentPane.add(lbldateProjection);
+		
+		JLabel moviTimeProj = new JLabel("НАЧАЛЕН ЧАС");
+		moviTimeProj.setHorizontalAlignment(SwingConstants.CENTER);
+		moviTimeProj.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		moviTimeProj.setForeground(Color.BLACK);
+		moviTimeProj.setBounds(430, 90, 200, 25);
+		contentPane.add(moviTimeProj);
+		
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+		String timeProjection = stf.format( theaterProjection.getTime());
+		JLabel lbltimeProjection = new JLabel(timeProjection);
+		lbltimeProjection.setHorizontalAlignment(SwingConstants.CENTER);
+		lbltimeProjection.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lbltimeProjection.setForeground(Color.WHITE);
+		lbltimeProjection.setBounds(430, 110, 200, 25);
+		contentPane.add(lbltimeProjection);
+		
+		
+		String theaterAdress = theaterProjection.getAdres();
+		JLabel lblAdressTheater = new JLabel(theaterAdress);
+		lblAdressTheater.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAdressTheater.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblAdressTheater.setForeground(Color.BLACK);
+		lblAdressTheater.setBounds(550, 40, 320, 30);
+		contentPane.add(lblAdressTheater);
+
+		JLabel lblOrigName = new JLabel("Оригинално заглавие");
+		lblOrigName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOrigName.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblOrigName.setForeground(Color.BLACK);
+		lblOrigName.setBounds(10, 40, 200, 30);
+		contentPane.add(lblOrigName);
+
+		String movieOrigName = curentMovie.origName;
+		JLabel lblOrigNameMovie = new JLabel(movieOrigName);
+		lblOrigNameMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblOrigNameMovie.setForeground(Color.WHITE);
+		lblOrigNameMovie.setBounds(220, 40, 200, 30);
+		contentPane.add(lblOrigNameMovie);
+
+		JLabel lblGenre = new JLabel("Жанр");
+		lblGenre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGenre.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblGenre.setForeground(Color.BLACK);
+		lblGenre.setBounds(10, 60, 200, 30);
+		contentPane.add(lblGenre);
+
+		String movieGenre = curentMovie.getGenre();
+		JLabel lblGenreMovie = new JLabel(movieGenre);
+		lblGenreMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblGenreMovie.setForeground(Color.WHITE);
+		lblGenreMovie.setBounds(220, 60, 200, 30);
+		contentPane.add(lblGenreMovie);
+
+		JLabel lblTimee = new JLabel("Времетраене");
+		lblTimee.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTimee.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblTimee.setForeground(Color.BLACK);
+		lblTimee.setBounds(10, 80, 200, 30);
+		contentPane.add(lblTimee);
+
+		int movieTime = curentMovie.getMovieTime();
+		String strTime = movieTime + "мин.";
+		JLabel lblTimeMovie = new JLabel(strTime);
+		lblTimeMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblTimeMovie.setForeground(Color.WHITE);
+		lblTimeMovie.setBounds(220, 80, 200, 30);
+		contentPane.add(lblTimeMovie);
+
+		JLabel lblLang = new JLabel("Език");
+		lblLang.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLang.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblLang.setForeground(Color.BLACK);
+		lblLang.setBounds(10, 100, 200, 30);
+		contentPane.add(lblLang);
+
+		String movieLang = curentMovie.getLanguage();
+		JLabel lblLangMovie = new JLabel(movieLang);
+		lblLangMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblLangMovie.setForeground(Color.WHITE);
+		lblLangMovie.setBounds(220, 100, 200, 30);
+		contentPane.add(lblLangMovie);
+
+		JLabel lblCountry = new JLabel("Държава/Година");
+		lblCountry.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCountry.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblCountry.setForeground(Color.BLACK);
+		lblCountry.setBounds(10, 120, 200, 30);
+		contentPane.add(lblCountry);
+
+		String movieCountry = curentMovie.getCountry();
+		JLabel lblCountryMovie = new JLabel(movieCountry);
+		lblCountryMovie.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblCountryMovie.setForeground(Color.WHITE);
+		lblCountryMovie.setBounds(220, 120, 200, 30);
+		contentPane.add(lblCountryMovie);
+	
+	
+	
+	}
+	
+	private void CountTicket( JButton[][] btnSeat, CinemaTheater theaterProjection){
+		int countTicket = 0;
+		int colums = theaterProjection.getColumns();
+		int lines = theaterProjection.getLines();
+		
+		for (int i = 0; i < lines; i++) {
+			for (int j = 0; j < colums; j++) {
+				if (btnSeat[i][j].getText().equals("0")){
+					countTicket++;
+				}
+			}
+			
+		}
+		System.out.println("cccccccccccccccccc "+countTicket);
+		float price = theaterProjection.getPrice() ;
+		
+		
+		JLabel priceLabel = new JLabel("До момента имате "+countTicket+" резервирани билета по "+String.format("%.2f",price)+
+				"лв. Обща стойност:"+String.format("%.2f",(countTicket*price))+"лв.");
+		priceLabel.repaint();
+		
+		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		priceLabel.setBackground(Color.WHITE);
+		priceLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		priceLabel.setForeground(Color.RED);
+		priceLabel.setBounds(10, 500, 800, 30);
+		contentPane.add(priceLabel);
+		
+	};
+
+
+}

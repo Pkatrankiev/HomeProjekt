@@ -53,6 +53,7 @@ import javax.swing.UIManager;
 
 public class ssss extends JFrame {
 	private JTextField textField;
+	private JTextField textField_1;
 	public ssss() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setForeground(Color.BLACK);
@@ -75,6 +76,11 @@ public class ssss extends JFrame {
 		textField.setBounds(63, 161, 86, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(50, 200, 94, 20);
+		getContentPane().add(textField_1);
+		textField_1.setColumns(10);
 	}
 	
 	public static void main(String[] args) {

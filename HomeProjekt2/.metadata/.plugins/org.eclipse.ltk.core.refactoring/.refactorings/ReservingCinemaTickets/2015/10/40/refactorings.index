@@ -1,0 +1,12 @@
+1443695751499	Delete element
+1443731945739	Rename compilation unit 'IfoScreen.java'
+1443736901295	Extract method 'TextLabels'
+1443777559328	Extract method 'TextFamily'
+1443777723569	Extract method 'TextName'
+1443800910764	Extract method 'CreatTextMasive'
+1443801056834	Extract method 'CreatSeatMasive'
+1443801845047	Extract method 'CreatFirstLine'
+1443807767273	Extract method 'TextLabels'
+1443807850873	Extract interface 'ButtonPirchase'
+1443807892953	Extract method 'ButtonPurchase'
+1443807945209	Delete element
